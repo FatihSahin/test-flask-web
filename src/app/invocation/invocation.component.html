@@ -1,0 +1,50 @@
+<div *ngIf="invocation">
+  <div class="row">
+    <div class="col-md-12">
+      <label class="col-form-label"><strong>{{ invocation.invocationSignature | simplifySignature }}</strong> - Signature</label>
+      <input type="text" class="form-control" placeholder="Signature" [(ngModel)]="invocation.invocationSignature" readonly>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+      <label class="col-form-label">Request Identifier</label>
+      <input type="text" class="form-control" placeholder="Identifier" [(ngModel)]="invocation.requestIdentifierKey" readonly>
+    </div>
+    <div class="col-md-1" style="padding-right: 0px;">
+      <label class="col-form-label">Replay</label>
+      <input type="checkbox" style="margin-top: 5px;width:auto;" class="form-control" [(ngModel)]="invocation.isReplayable">
+    </div>
+    <div class="col-md-1" style="padding-right: 0px;">
+      <label class="col-form-label">Faulted</label>
+      <input type="checkbox" disabled style="margin-top: 5px;width:auto;" class="form-control" [ngModel]="invocation.isFaulted">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="col-form-label">Request Info</label>
+      <input type="text" class="form-control" placeholder="Request Info" [(ngModel)]="invocation.requestDisplayInfo" readonly>
+    </div>
+    <div class="col-md-6" *ngIf="!invocation.isFaulted">
+      <label class="col-form-label">Response Info</label>
+      <input type="text" class="form-control" placeholder="Response Info" [(ngModel)]="invocation.responseDisplayInfo" readonly>
+    </div>
+    <div class="col-md-6" *ngIf="invocation.isFaulted">
+      <label class="col-form-label">Exception Type</label>
+      <input type="text" class="form-control" placeholder="Exception Type" [(ngModel)]="invocation.exceptionType" readonly>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label class="col-form-label">Request</label>
+      <textarea class="form-control jsonEditor" placeholder="Request" [ngModel]="invocation.request | jsonPrettify" (ngModelChange)="invocation.request=$event"></textarea>
+    </div>
+    <div class="col-md-6" *ngIf="!invocation.isFaulted">
+      <label class="col-form-label">Response</label>
+      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Response" [ngModel]="invocation.response | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea>
+    </div>
+    <div class="col-md-6" *ngIf="invocation.isFaulted">
+      <label class="col-form-label">Exception</label>
+      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea>
+    </div>
+  </div>
+</div>

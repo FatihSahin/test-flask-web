@@ -1,0 +1,49 @@
+<header class="app-header navbar">
+    <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
+    <a class="navbar-brand" href="#"></a>
+    <ul class="nav navbar-nav mr-auto d-md-down-none">
+        <li class="nav-item">
+            <a class="nav-link navbar-toggler" href="#" appSidebarToggler>&#9776;</a>
+        </li>
+    </ul>
+</header>
+
+<div class="app-body">
+    <div class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Dashboard</a>
+                </li>
+                <li class="nav-title">Projects</li>
+                <li *ngFor="let project of projects" class="nav-item">
+                     <a class="nav-link" routerLinkActive="active" [routerLink]="['/project', project.projectKey]"><i class="icon-globe"></i> {{project.projectName}}</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main content -->
+    <main class="main">
+
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+            <app-breadcrumbs></app-breadcrumbs>
+        </ol>
+
+        <div class="container-fluid">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- /.conainer-fluid -->
+    </main>
+    <aside class="aside-menu">
+        <app-assertion></app-assertion>
+    </aside>
+</div>
+
+<footer class="app-footer">
+    <a href="http://www.testflask.com">TestFlask</a> &copy; 2017
+    <span class="float-right">Powered by <a href="http://coreui.io">CoreUI</a>
+    </span>
+</footer>
+<simple-notifications></simple-notifications>

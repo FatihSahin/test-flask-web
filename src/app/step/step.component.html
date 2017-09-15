@@ -1,0 +1,100 @@
+<div *ngIf="step">
+  <br />
+  <assert-result *ngIf="assertion" class="pull-left assert-result-left" [status]="assertion.status"></assert-result> <h5>Step #{{step.stepNo}} - {{step.stepName}}</h5>
+  <hr />
+  <div class="row">
+    <div class="col-md-4">
+      <label class="col-form-label">Step No</label>
+      <input type="text" class="form-control" placeholder="Step No" [(ngModel)]="step.stepNo" readonly>
+    </div>
+    <div class="col-md-8">
+      <label class="col-form-label">Step Name</label>
+      <input type="text" class="form-control" placeholder="Step Name" [(ngModel)]="step.stepName">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 form-group">
+      <label class="col-form-label">Step Description</label>
+      <textarea class="form-control" placeholder="Step Description" [(ngModel)]="step.stepDescription"></textarea>
+    </div>
+  </div>
+  <div class="row" *ngIf="step.invocations">
+    <div class="col-md-12 form-group">
+      <label class="col-form-label">Invocations</label>
+      <div class="row" style="margin-left: 0px;margin-right: 0px;">
+        <div class="col-md-3 invocationTree">
+          <!-- https://angular2-tree.readme.io/docs/templates -->
+          <tree-root [nodes]="tree">
+            <ng-template #treeNodeTemplate let-node let-index="index">
+              <a [routerLink]="['invocation', node.data.id]" [title]="node.data.invocation.invocationSignature" [class.faultedInvocation]="node.data.invocation.isFaulted">{{ node.data.name }} - ({{node.data.invocation.duration}} ms)</a>
+            </ng-template>
+          </tree-root>
+        </div>
+        <div class="col-md-9 invocationDetail">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="assertion">
+    <div class="col-md-12 form-group">
+      <label class="col-form-label"><h6>Assertion</h6></label>
+      <div class="row card assertionContainer">
+        <div class="row form-group">
+          <div class="col-md-6">
+            <label class="col-form-label">Expected Result (Json)</label>
+            <textarea class="form-control" style="min-height:200px;" placeholder="Enter expected response object here..." [(ngModel)]="assertion.expected"></textarea>
+          </div>
+          <div class="col-md-6">
+            <label class="col-form-label">Assertion Result (Json)</label>
+            <textarea class="form-control" style="min-height:200px;" placeholder="Assertion result object will be shown here.." readonly>{{ assertion.lastAssertionResult | jsonPrettify }}</textarea>
+          </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-2 col-form-label">Status</label>
+            <label class="col-sm-10 col-form-label" [ngStyle]="getAssertionStatusLabelStyle(assertion.status)" >{{ AssertionStatus[assertion.status] }}</label>
+        </div>
+        <span *ngIf="assertion.lastAssertedOn">
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Last Asserted On</label>
+            <label class="col-sm-10 col-form-label">{{assertion.lastAssertedOn | date:'short'}}</label>
+          </div>
+          <div class="row">
+            <label class="col-sm-2 col-form-label">Duration</label>
+            <label class="col-sm-10 col-form-label">{{assertion.duration}} ms</label>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- Raw Request Modal -->
+  <div class="modal fade" bsModal #rawRequestModal="bs-modal">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">{{ rootInvocation.invocationSignature | simplifySignature }} - Http Request</h5>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="rawRequestModal.hide()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+          <textarea style="width:100%;min-height:300px;" [(ngModel)]="rootInvocation.requestRaw"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="rawRequestModal.hide()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pull-right form-group">
+    <div>
+      <button type="button" class="btn btn-secondary" (click)="rawRequestModal.show()"><i class="fa fa-code"></i> Raw Request</button>
+      <button type="button" class="btn btn-danger" (click)="recordStep()"><i class="fa fa-video-camera"></i> Record</button>
+      <button type="button" class="btn btn-primary" (click)="callStep()"><i class="fa fa-bolt"></i> Call</button>
+      <button type="button" class="btn btn-primary" (click)="playStep()"><i class="fa fa-play"></i> Play</button>
+      <button type="button" class="btn btn-success" (click)="assertStep()"><i class="fa fa-flask"></i> Assert</button>
+      <button type="button" class="btn btn-danger" (click)="revertStep()"><i class="fa fa-undo"></i> Revert</button>
+      <button type="button" class="btn btn-primary" (click)="saveStep()"><i class="fa fa-floppy-o"></i> Save</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div style="padding:2px;background:#D6EDF8">
+  <div style="background: #263238; color: #fff;">
+    <span style="padding-left: 5px;">Assertion Explorer</span>
+  </div>
+  <div class="list-group" *ngIf="assertionService.assertions && assertionService.assertions.length > 0">
+    <a [routerLink]="['/project', assertion.projectKey, 'scenario', assertion.scenarioNo, 'step', assertion.stepNo]" class="list-group-item assertion-small"
+      *ngFor="let assertion of assertionService.assertions">
+      <assert-result class="pull-left assert-result-left" [status]="assertion.status"></assert-result> {{assertion.title}}
+      <div>{{assertion.lastAssertedOn | date:'short'}}</div>
+    </a>
+  </div>
+</div>

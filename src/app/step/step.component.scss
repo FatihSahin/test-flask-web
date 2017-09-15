@@ -1,0 +1,24 @@
+.invocationTree {
+    background: #eceff1;
+    border-width: 1px 1px 1px 1px;
+    border-style:  solid;
+    border-color: #cfd8dc;
+    min-height: 200px;
+}
+
+.invocationDetail {
+    border-width: 1px 1px 1px 0px;
+    border-style:  solid;
+    border-color: #cfd8dc;
+    min-height: 200px;
+}
+
+.assertionContainer {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding:20px;
+}
+
+.faultedInvocation {
+    color: red;
+}

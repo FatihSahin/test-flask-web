@@ -1,0 +1,36 @@
+<span class="h5">Scenario Details</span>
+<div class="pull-right">
+  <button type="button" class="btn btn-primary"><i class="fa fa-clone"></i> Clone Scenario</button>
+</div>
+<hr/>
+<div *ngIf="scenario">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="row">
+        <div class="col-md-3">
+          <label class="col-form-label">Scenario No</label>
+          <input type="text" class="form-control" placeholder="Scenario No" [(ngModel)]="scenario.scenarioNo" readonly>
+        </div>
+        <div class="col-md-9">
+          <label class="col-form-label">Scenario Name</label>
+          <input type="text" class="form-control" placeholder="Scenario Name" [(ngModel)]="scenario.scenarioName">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label class="col-form-label">Description</label>
+          <textarea class="form-control scenarioDesc" placeholder="Description" [(ngModel)]="scenario.scenarioDescription"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="col-md-12" *ngIf="scenario.steps && scenario.steps.length > 0">
+        <label class="col-form-label">Recorded Steps</label>
+        <div class="list-group stepList">
+          <a [routerLink]="['step', step.stepNo]" [routerLinkActive]="['active']" class="list-group-item" *ngFor="let step of scenario.steps">{{step.stepName}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
