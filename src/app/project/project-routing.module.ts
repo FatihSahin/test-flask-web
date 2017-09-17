@@ -9,8 +9,16 @@ import { ScenarioComponent } from 'app/scenario/scenario.component';
 import { ScenarioCreateComponent } from 'app/scenario/create/scenario-create.component';
 import { StepComponent } from "app/step/step.component";
 import { InvocationComponent } from "app/invocation/invocation.component";
+import { ProjectCreateComponent } from 'app/project/create/project-create.component';
 
 const routes: Routes = [
+  {
+    path: 'create',
+    component: ProjectCreateComponent,
+    data: {
+      crumbs: ['CreateProject']
+    }
+  },
   {
     path: ':projectKey/scenario/:scenarioNo',
     component: ScenarioComponent,
@@ -49,7 +57,7 @@ const routes: Routes = [
     data: {
       crumbs: [':projectKey', 'CreateScenario']
     }
-  }
+  },
 ];
 
 @NgModule({

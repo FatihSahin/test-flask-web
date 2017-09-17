@@ -15,6 +15,7 @@ import { StepService } from "app/step/step.service";
 
 import { JsonPrettifyPipe } from "app/invocation/json-prettify.pipe";
 import { SimplifySignaturePipe } from "app/invocation/simplify-signature.pipe";
+import { ProjectCreateComponent } from 'app/project/create/project-create.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { SimplifySignaturePipe } from "app/invocation/simplify-signature.pipe";
     StepComponent,
     InvocationComponent,
     JsonPrettifyPipe,
-    SimplifySignaturePipe
+    SimplifySignaturePipe,
+    ProjectCreateComponent
   ],
   providers: [
     StepService

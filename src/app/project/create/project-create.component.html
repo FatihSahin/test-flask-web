@@ -1,0 +1,28 @@
+<span class="h5">Create Project</span>
+<hr />
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-9">
+        <label class="col-form-label">Project Key</label>
+        <input type="text" class="form-control" placeholder="Project Key" [(ngModel)]="project.projectKey">
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label">Project No</label>
+        <input type="text" class="form-control" placeholder="Project No" [(ngModel)]="project.projectNo" readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="col-form-label">Project Name</label>
+        <input type="text" class="form-control" placeholder="Project Name" [(ngModel)]="project.projectName">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label class="col-form-label">Description</label>
+        <textarea class="form-control projectDesc" placeholder="Description" [(ngModel)]="project.projectDescription"></textarea>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="createProject()"><i class="fa fa-save"></i> Create</button>
+  </div>

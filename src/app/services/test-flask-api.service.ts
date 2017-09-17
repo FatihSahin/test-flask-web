@@ -55,6 +55,10 @@ export class TestFlaskApiService {
     return this.http.post<Scenario>(AppSettings.API_ENDPOINT + 'scenario', scenario);
   }
 
+  public insertProject(project: Project): Observable<Project> {
+    return this.http.post<Project>(AppSettings.API_ENDPOINT + 'project', project);
+  }
+
   ngOnInit() {
     
   }

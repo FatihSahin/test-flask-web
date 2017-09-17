@@ -15,11 +15,15 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i> Dashboard</a>
                 </li>
-                <li class="nav-title">Projects</li>
+                <li class="nav-title">Projects <span class="pull-right add-project"><a title="Add project" [routerLink]="['/project/create']">+</a></span></li>
+                <li>
+                    <input type="text" class="project-search" placeholder="Type to filter...">
+                </li>
                 <li *ngFor="let project of projects" class="nav-item">
-                     <a class="nav-link" routerLinkActive="active" [routerLink]="['/project', project.projectKey]"><i class="icon-globe"></i> {{project.projectName}}</a>
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="['/project', project.projectKey]"><i class="icon-globe"></i> {{project.projectName}}</a>
                 </li>
             </ul>
+
         </nav>
     </div>
 

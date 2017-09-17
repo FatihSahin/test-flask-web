@@ -4,7 +4,8 @@ import { TestFlaskApiService } from "app/services/test-flask-api.service";
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './full-layout.component.html'
+  templateUrl: './full-layout.component.html',
+  styleUrls: ['./full-layout.component.scss']
 })
 export class FullLayoutComponent implements OnInit {
 
