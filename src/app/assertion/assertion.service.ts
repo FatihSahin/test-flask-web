@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TestFlaskApiService } from "app/services/test-flask-api.service";
-import { Assertion, Step, Invocation, AssertionStatus } from "models/model";
+import { Assertion, Step, Invocation, AssertionStatus, Scenario } from "models/model";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/Rx';
 import * as _ from "lodash";
@@ -10,6 +10,7 @@ import { HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class AssertionService {
+
 
   assertions: Assertion[];
 
@@ -32,16 +33,28 @@ export class AssertionService {
     return this.api.getAssertionByStep(stepNo);
   }
 
-  loadByScenario(scenarioNo: number): void {
-    this.api.getAssertionsByScenario(scenarioNo).subscribe(assertions => {
-      this.assertions = assertions;
-    });
+  loadByScenario(scenarioNo: number): Observable<Assertion[]> {
+    return this.api.getAssertionsByScenario(scenarioNo);
   }
 
-  loadByProject(projectKey: string): void {
-    this.api.getAssertionsByProject(projectKey).subscribe(assertions => {
-      this.assertions = assertions;
-    });
+  loadByProject(projectKey: string): Observable<Assertion[]> {
+    return this.api.getAssertionsByProject(projectKey);
+  }
+
+  createDummyAssertion(step: Step): Assertion {
+    let assertion: Assertion = {
+      title: this.getAssertionTitle(step),
+      stepNo: step.stepNo,
+      scenarioNo: step.scenarioNo,
+      projectKey: step.projectKey,
+      status: AssertionStatus.NotAsserted,
+      expected: '',
+      duration: 0,
+      lastAssertedOn: undefined,
+      lastAssertionResult: ''
+    };
+
+    return assertion;
   }
 
   private showExplorer(): void {
@@ -64,6 +77,42 @@ export class AssertionService {
     });
   }
 
+  assertAndShowScenario(scenario: Scenario) {
+    this.showExplorer();
+    //load existing assertions
+    this.loadByScenario(scenario.scenarioNo).subscribe(assertions => {
+
+      this.assertions = assertions;
+
+      //reset&merge assertions array
+      scenario.steps.forEach(step => {
+        let assertion = this.assertions.find(ass => ass.stepNo === step.stepNo);
+        if (!assertion) {
+          //if there are no assertions for any step, include a dummy one
+          this.assertions.push(this.createDummyAssertion(step));
+        }
+        else {
+          assertion.status = AssertionStatus.NotAsserted; //set existing ones to not asserted (reset status)
+        }
+      });
+
+      //order steps and run assertions sequentially with concatMap
+      Observable.from(_.orderBy(scenario.steps, (step) => step.createdOn))
+        .concatMap((step) => {
+          let assertion = this.assertions.find(ass => ass.stepNo === step.stepNo);
+          //load step invocations (as they are empty when scenario is loaded flat (loadByScenario))
+          return this.api.getStep(step.stepNo).flatMap(st => {
+            step.invocations = st.invocations;
+            return this.assertStep(step, assertion);
+          })
+        }).subscribe(assertion => {
+          let step = scenario.steps.find(st => st.stepNo === assertion.stepNo);
+          let index = _.findIndex(this.assertions, (ass) => ass.stepNo === step.stepNo);
+          this.assertions[index] = assertion;
+        });
+    });
+  }
+
   private assertStep(step: Step, assertion: Assertion): Observable<Assertion> {
 
     const rootInvocation = step.invocations.find(i => i.depth === 1);
@@ -77,7 +126,7 @@ export class AssertionService {
       assertion.title = this.getAssertionTitle(step);
       assertion.lastAssertionResult = JSON.stringify(result);
 
-      return this.api.updateAssertion(assertion);
+      return this.api.putAssertion(assertion).map((upd) => assertion);
     });
   }
 
@@ -93,6 +142,7 @@ export class AssertionService {
     //lookup http method
     let httpHeaders: HttpHeaders = this.mapHttpHeaders(parsedRequestObj.headers, rootInvocation);
 
+    //we only support POST for now, for full Rest API support, all HTTP verbs must be implemented
     if (parsedRequestObj.method === "POST") {
       //call service and get response obj
       const originalUrl: string = (<string>(parsedRequestObj.protocol)).toLowerCase() + '://' + parsedRequestObj.url;

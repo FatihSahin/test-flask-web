@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TestFlaskApiService } from "app/services/test-flask-api.service";
 import { Scenario } from "models/model";
+import { AssertionService } from 'app/assertion/assertion.service';
 
 @Component({
   selector: 'app-scenario',
@@ -13,7 +14,7 @@ export class ScenarioComponent implements OnInit {
   scenarioNo: number;
   scenario: Scenario;
   
-  constructor(private api: TestFlaskApiService, private route: ActivatedRoute) { }
+  constructor(private api: TestFlaskApiService, private assertionService: AssertionService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -23,6 +24,14 @@ export class ScenarioComponent implements OnInit {
         this.scenario = scenario;
       });
     });
+  }
+
+  assertScenario() {
+    this.assertionService.assertAndShowScenario(this.scenario);
+  }
+
+  cloneScenario() {
+    alert("Not implemented");
   }
 
 }

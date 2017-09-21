@@ -6,7 +6,7 @@
     <a [routerLink]="['/project', assertion.projectKey, 'scenario', assertion.scenarioNo, 'step', assertion.stepNo]" class="list-group-item assertion-small"
       *ngFor="let assertion of assertionService.assertions">
       <assert-result class="pull-left assert-result-left" [status]="assertion.status"></assert-result> {{assertion.title}}
-      <div>{{assertion.lastAssertedOn | date:'short'}}</div>
+      <div>{{assertion.lastAssertedOn | date:'medium'}}</div>
     </a>
   </div>
 </div>

@@ -93,17 +93,7 @@ export class StepComponent implements OnInit {
         }
         else {
           //create a dummy assertion
-          this.assertion = {
-            title: this.assertionService.getAssertionTitle(this.step),
-            stepNo: this.step.stepNo,
-            scenarioNo: this.step.scenarioNo,
-            projectKey: this.step.projectKey,
-            status: AssertionStatus.NotAsserted,
-            expected: '',
-            duration: 0,
-            lastAssertedOn: undefined,
-            lastAssertionResult: ''
-          };
+          this.assertion = this.assertionService.createDummyAssertion(this.step);
         }
       });
     });
@@ -111,16 +101,28 @@ export class StepComponent implements OnInit {
 
   saveStep() {
     this.api.updateStep(this.step).subscribe(step => {
-      this.notify.success(
-        'Step #' + step.stepNo,
-        'Successfully saved!',
-        {
-          showProgressBar: false,
-          timeOut: 1500,
-          clickToClose: true,
-        }
-      );
+      //also put assertion if any expected expression is saved
+      if (this.assertion && this.assertion.expected) {
+        this.api.putAssertion(this.assertion).subscribe((ass) => {
+          this.notifyStepSave(step);
+        })
+      }
+      else { //directly notify
+        this.notifyStepSave(step);
+      }
     });
+  }
+
+  private notifyStepSave(step: Step): void {
+    this.notify.success(
+      'Step #' + step.stepNo,
+      'Successfully saved!',
+      {
+        showProgressBar: false,
+        timeOut: 1500,
+        clickToClose: true,
+      }
+    );
   }
 
   revertStep() {
@@ -141,5 +143,13 @@ export class StepComponent implements OnInit {
       default:
         return { color: 'black' };
     }
+  }
+
+  playStep() {
+    alert("Not implemented");
+  }
+
+  callStep() {
+    alert("Not implemented");
   }
 }

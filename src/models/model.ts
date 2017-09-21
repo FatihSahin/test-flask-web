@@ -10,6 +10,7 @@ export class Scenario {
     scenarioName: string;
     scenarioDescription: string;
     projectKey: string;
+    createdOn: Date;
     steps: Step[];
 }
 
@@ -19,6 +20,7 @@ export class Step {
     projectKey: string;
     stepName: string;
     stepDescription: string;
+    createdOn: Date;
     invocations: Invocation[];
 }
 

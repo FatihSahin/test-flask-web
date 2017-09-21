@@ -35,7 +35,8 @@ export class TestFlaskApiService {
     return this.http.put<Step>(AppSettings.API_ENDPOINT + 'step/', step);
   }
 
-  public updateAssertion(assertion: Assertion): Observable<Assertion> {
+  //inserts or updates
+  public putAssertion(assertion: Assertion): Observable<Assertion> {
     return this.http.put<Assertion>(AppSettings.API_ENDPOINT + 'step/assertion/' + assertion.stepNo, assertion)
   }
 

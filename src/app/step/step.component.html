@@ -1,15 +1,19 @@
 <div *ngIf="step">
   <br />
-  <assert-result *ngIf="assertion" class="pull-left assert-result-left" [status]="assertion.status"></assert-result> <h5>Step #{{step.stepNo}} - {{step.stepName}}</h5>
+  <assert-result *ngIf="assertion" class="pull-left assert-result-left" style="font-size:small;" [status]="assertion.status"></assert-result> <h6>Step #{{step.stepNo}} - {{step.stepName}}</h6>
   <hr />
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
       <label class="col-form-label">Step No</label>
       <input type="text" class="form-control" placeholder="Step No" [(ngModel)]="step.stepNo" readonly>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
       <label class="col-form-label">Step Name</label>
       <input type="text" class="form-control" placeholder="Step Name" [(ngModel)]="step.stepName">
+    </div>
+    <div class="col-md-3">
+      <label class="col-form-label">Recorded On</label>
+      <input type="text" class="form-control" placeholder="Recorded On" [ngModel]="step.createdOn | date:'medium'" readonly>
     </div>
   </div>
   <div class="row">
