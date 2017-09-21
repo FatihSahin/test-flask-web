@@ -1,7 +1,11 @@
 <span class="h5" *ngIf="scenario">Scenario #{{scenario.scenarioNo}} - {{scenario.scenarioName}}</span>
 <div class="pull-right">
-  <button type="button" class="btn btn-primary" (click)="cloneScenario()"><i class="fa fa-clone"></i> Clone Scenario</button>
-  <button type="button" class="btn btn-success" (click)="assertScenario()"><i class="fa fa-flask"></i> Assert Scenario</button>
+  <button type="button" class="btn btn-danger" (click)="recordScenario()"><i class="fa fa-video-camera"></i> Overwrite</button>
+  <button type="button" class="btn btn-primary" (click)="callScenario()"><i class="fa fa-bolt"></i> Call</button>
+  <button type="button" class="btn btn-primary" (click)="playScenario()"><i class="fa fa-play"></i> Play</button>
+  <button type="button" class="btn btn-success" (click)="assertScenario()"><i class="fa fa-flask"></i> Assert</button>
+  <button type="button" class="btn btn-primary" (click)="cloneScenario()"><i class="fa fa-clone"></i> Clone</button>
+  <button type="button" class="btn btn-primary" (click)="saveScenario()"><i class="fa fa-floppy-o"></i> Save</button>
 </div>
 <hr/>
 <div *ngIf="scenario">

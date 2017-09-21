@@ -1,6 +1,7 @@
 <div *ngIf="step">
   <br />
-  <assert-result *ngIf="assertion" class="pull-left assert-result-left" style="font-size:small;" [status]="assertion.status"></assert-result> <h6>Step #{{step.stepNo}} - {{step.stepName}}</h6>
+  <assert-result *ngIf="assertion" class="pull-left assert-result-left" style="font-size:small;" [status]="assertion.status"></assert-result>
+  <h6>Step #{{step.stepNo}} - {{step.stepName}}</h6>
   <hr />
   <div class="row">
     <div class="col-md-2">
@@ -55,8 +56,8 @@
           </div>
         </div>
         <div class="row">
-            <label class="col-sm-2 col-form-label">Status</label>
-            <label class="col-sm-10 col-form-label" [ngStyle]="getAssertionStatusLabelStyle(assertion.status)" >{{ AssertionStatus[assertion.status] }}</label>
+          <label class="col-sm-2 col-form-label">Status</label>
+          <label class="col-sm-10 col-form-label" [ngStyle]="getAssertionStatusLabelStyle(assertion.status)">{{ AssertionStatus[assertion.status] }}</label>
         </div>
         <span *ngIf="assertion.lastAssertedOn">
           <div class="row">
@@ -90,10 +91,11 @@
       </div>
     </div>
   </div>
-  <div class="row pull-right form-group">
-    <div>
+  <div class="row form-group" style="margin-right: 10px;">
+    <div class="col-md-12">
+      <span style="margin-right: 10px;"><strong>Step Actions</strong></span>
       <button type="button" class="btn btn-secondary" (click)="rawRequestModal.show()"><i class="fa fa-code"></i> Raw Request</button>
-      <button type="button" class="btn btn-danger" (click)="recordStep()"><i class="fa fa-video-camera"></i> Record</button>
+      <button type="button" class="btn btn-danger" (click)="recordStep()"><i class="fa fa-video-camera"></i> Overwrite</button>
       <button type="button" class="btn btn-primary" (click)="callStep()"><i class="fa fa-bolt"></i> Call</button>
       <button type="button" class="btn btn-primary" (click)="playStep()"><i class="fa fa-play"></i> Play</button>
       <button type="button" class="btn btn-success" (click)="assertStep()"><i class="fa fa-flask"></i> Assert</button>

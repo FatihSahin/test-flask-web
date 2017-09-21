@@ -26,11 +26,27 @@ export class ScenarioComponent implements OnInit {
     });
   }
 
+  recordScenario() {
+    alert("Not implemented");
+  }
+
+  callScenario() {
+    alert("Not implemented");
+  }
+
+  playScenario() {
+    alert("Not implemented");
+  }
+
   assertScenario() {
     this.assertionService.assertAndShowScenario(this.scenario);
   }
 
   cloneScenario() {
+    alert("Not implemented");
+  }
+
+  saveScenario() {
     alert("Not implemented");
   }
 
