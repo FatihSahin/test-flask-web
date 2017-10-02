@@ -15,6 +15,14 @@ In order to properly manage your services project, your services must be TestFla
     ```
     $ ng serve
     ```
+
+*   You can configure TestFlask API url inside appSettings/appSettings.ts file
+    ```typescript
+    export class AppSettings {
+        public static API_ENDPOINT='http://localhost:12079/api/';
+    }
+    ```
+
 *   By default, you can access TestFlask Manager from http://localhost:4200
 
  ## Things that you can do with TestFlask Manager
