@@ -45,6 +45,7 @@ export class Invocation {
     invocationIndex: number;
     hashCode: string;
     deepHashCode: string;
+    leafHashCode: string;
     instanceHashCode: string;
     parentInstanceHashCode: string;
     assertionResult: string;
