@@ -181,8 +181,15 @@ export class AssertionService {
       }
     });
 
-    //append a step no header
-    angHeaders = angHeaders.append("TestFlask-StepNo", rootInvocation.stepNo.toString());
+    //append a step no header if it does not exist
+    let stepNoHeader = angHeaders.get("TestFlask-StepNo");
+    if (!stepNoHeader) {
+      angHeaders = angHeaders.append("TestFlask-StepNo", rootInvocation.stepNo.toString());
+    }
+    else {
+      angHeaders = angHeaders.set("TestFlask-StepNo", rootInvocation.stepNo.toString());
+    }
+
 
     return angHeaders;
   }
