@@ -9,8 +9,8 @@ import { Scenario } from "models/model";
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent implements OnInit {
-  private projectKey: string;
-  private scenarios: Scenario[];
+  projectKey: string;
+  scenarios: Scenario[];
 
   constructor(private api: TestFlaskApiService, private route: ActivatedRoute, private router: Router) {
 
