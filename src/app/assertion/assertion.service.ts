@@ -90,8 +90,7 @@ export class AssertionService {
         if (!assertion) {
           // if there are no assertions for any step, include a dummy one
           this.assertions.push(this.createDummyAssertion(step));
-        }
-        else {
+        } else {
           assertion.status = AssertionStatus.NotAsserted; // set existing ones to not asserted (reset status)
         }
       });
@@ -172,8 +171,7 @@ export class AssertionService {
         // find TestFlask-TestMode header and set it to 'Assert' mode
         if (hdr.name === 'TestFlask-Mode') {
           angHeaders = angHeaders.append(hdr.name, 'Assert');
-        }
-        else {
+        } else {
           angHeaders = angHeaders.append(hdr.name, hdr.values[0].value);
         }
       }
@@ -183,8 +181,7 @@ export class AssertionService {
     const stepNoHeader = angHeaders.get('TestFlask-StepNo');
     if (!stepNoHeader) {
       angHeaders = angHeaders.append('TestFlask-StepNo', rootInvocation.stepNo.toString());
-    }
-    else {
+    } else {
       angHeaders = angHeaders.set('TestFlask-StepNo', rootInvocation.stepNo.toString());
     }
 
