@@ -33,7 +33,7 @@ export class ProjectCreateComponent implements OnInit {
         }
       );
       setTimeout(() => {
-        this.router.navigateByUrl("/dashboard");
+        this.router.navigateByUrl('/dashboard');
         window.location.reload();
       }, 750);
     });

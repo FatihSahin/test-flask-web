@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from "models/model";
-import { TestFlaskApiService } from "app/services/test-flask-api.service";
+import { Project } from 'models/model';
+import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 
 @Component({
   selector: 'app-dashboard',

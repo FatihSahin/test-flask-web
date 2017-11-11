@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Step, Invocation } from "models/model";
+import { Step, Invocation } from 'models/model';
 
 @Injectable()
 export class StepService {
@@ -13,8 +13,8 @@ export class StepService {
   }
 
   simplifyName(signature: string): string {
-    let expression = /::(\w+)\(/;
-    let match = expression.exec(signature);
+    const expression = /::(\w+)\(/;
+    const match = expression.exec(signature);
     return match[1];
   }
 }

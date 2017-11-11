@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { TestFlaskApiService } from "app/services/test-flask-api.service";
-import { Scenario } from "models/model";
+import { TestFlaskApiService } from 'app/services/test-flask-api.service';
+import { Scenario } from 'models/model';
 
 @Component({
   selector: 'app-project',

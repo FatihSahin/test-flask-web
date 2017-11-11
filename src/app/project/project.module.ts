@@ -8,13 +8,13 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { CommonComponentsModule } from 'app/shared/common-components.module';
 import { ScenarioComponent } from 'app/scenario/scenario.component';
 import { ScenarioCreateComponent } from 'app/scenario/create/scenario-create.component';
-import { StepComponent } from "app/step/step.component";
+import { StepComponent } from 'app/step/step.component';
 import { TreeModule } from 'angular-tree-component';
 import { InvocationComponent } from 'app/invocation/invocation.component';
-import { StepService } from "app/step/step.service";
+import { StepService } from 'app/step/step.service';
 
-import { JsonPrettifyPipe } from "app/invocation/json-prettify.pipe";
-import { SimplifySignaturePipe } from "app/invocation/simplify-signature.pipe";
+import { JsonPrettifyPipe } from 'app/invocation/json-prettify.pipe';
+import { SimplifySignaturePipe } from 'app/invocation/simplify-signature.pipe';
 import { ProjectCreateComponent } from 'app/project/create/project-create.component';
 
 @NgModule({

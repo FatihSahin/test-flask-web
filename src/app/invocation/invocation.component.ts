@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { StepService } from "app/step/step.service";
-import { Invocation } from "models/model";
-import { TestFlaskApiService } from "app/services/test-flask-api.service";
+import { StepService } from 'app/step/step.service';
+import { Invocation } from 'models/model';
+import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 
 @Component({
   selector: 'app-invocation',

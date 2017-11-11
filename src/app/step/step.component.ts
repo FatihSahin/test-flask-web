@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TestFlaskApiService } from "app/services/test-flask-api.service";
-import { Step, Invocation, Assertion, AssertionStatus } from "models/model";
+import { Step, Invocation, Assertion, AssertionStatus } from 'models/model';
 import { ITreeOptions } from "angular-tree-component/dist/defs/api";
 import { StepService } from "app/step/step.service";
 import { NotificationsService } from "angular2-notifications";
@@ -18,7 +18,7 @@ export class StepComponent implements OnInit {
   // allows to use AssertionStatus in template
   AssertionStatus = AssertionStatus;
 
-  //props
+  // props
   stepNo: number;
   step: Step;
   rootInvocation: Invocation;
@@ -34,12 +34,12 @@ export class StepComponent implements OnInit {
 
     this.tree = [];
 
-    let mappedInvocations: any = {};
+    const mappedInvocations: any = {};
     let currentInvocation: Invocation;
     let mappedElem: any;
 
     // First map the nodes of the array to an object -> create a hash table.
-    for (var i = 0, len = invocations.length; i < len; i++) {
+    for (let i = 0, len = invocations.length; i < len; i++) {
       currentInvocation = invocations[i];
       mappedInvocations[currentInvocation.instanceHashCode] = {
         id: currentInvocation.instanceHashCode,
@@ -50,8 +50,8 @@ export class StepComponent implements OnInit {
       };
     }
 
-    //create tree
-    for (var instanceHashCode in mappedInvocations) {
+    // create tree
+    for (const instanceHashCode in mappedInvocations) {
       if (mappedInvocations.hasOwnProperty(instanceHashCode)) {
         mappedElem = mappedInvocations[instanceHashCode];
         // If the element is not at the root level, add it to its parent array of children.
@@ -76,23 +76,23 @@ export class StepComponent implements OnInit {
   private loadStep() {
     this.api.getStep(this.stepNo).subscribe(data => {
 
-      //this can be refactored (both service and component has step property, seems awkward)
+      // this can be refactored (both service and component has step property, seems awkward)
       this.step = data;
       this.stepService.step = this.step;
 
-      //load invocations
+      // load invocations
       this.loadInvocationTree(this.step.invocations);
       if (this.step.invocations) {
         this.rootInvocation = this.step.invocations.find(inv => inv.depth === 1);
       }
 
-      //load assertion
+      // load assertion
       this.assertionService.getByStep(this.stepNo).subscribe(assertion => {
         if (assertion) {
           this.assertion = assertion;
         }
         else {
-          //create a dummy assertion
+          // create a dummy assertion
           this.assertion = this.assertionService.createDummyAssertion(this.step);
         }
       });
@@ -101,13 +101,13 @@ export class StepComponent implements OnInit {
 
   saveStep() {
     this.api.updateStep(this.step).subscribe(step => {
-      //also put assertion if any expected expression is saved
+      // also put assertion if any expected expression is saved
       if (this.assertion && this.assertion.expected) {
         this.api.putAssertion(this.assertion).subscribe((ass) => {
           this.notifyStepSave(step);
         })
       }
-      else { //directly notify
+      else { // directly notify
         this.notifyStepSave(step);
       }
     });
@@ -146,10 +146,10 @@ export class StepComponent implements OnInit {
   }
 
   playStep() {
-    alert("Not implemented");
+    alert('Not implemented');
   }
 
   callStep() {
-    alert("Not implemented");
+    alert('Not implemented');
   }
 }

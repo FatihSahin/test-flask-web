@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { TestFlaskApiService } from "app/services/test-flask-api.service";
-import { Assertion, Step, Invocation, AssertionStatus, Scenario } from "models/model";
-import { Observable } from "rxjs/Observable";
+import { TestFlaskApiService } from 'app/services/test-flask-api.service';
+import { Assertion, Step, Invocation, AssertionStatus, Scenario } from 'models/model';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
-import * as _ from "lodash";
-import * as httpRequestParser from "http-request-parser";
-import { HttpClient } from "@angular/common/http";
-import { HttpHeaders } from "@angular/common/http";
+import * as _ from 'lodash';
+import * as httpRequestParser from 'http-request-parser';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class AssertionService {
 
-
+  private forbiddenCorsHeaders: string[] = ['Content-Length', 'Accept-Encoding', 'Host', 'User-Agent', 'Origin'];
   assertions: Assertion[];
 
   constructor(private api: TestFlaskApiService, private http: HttpClient) {
@@ -42,7 +42,7 @@ export class AssertionService {
   }
 
   createDummyAssertion(step: Step): Assertion {
-    let assertion: Assertion = {
+    const assertion: Assertion = {
       title: this.getAssertionTitle(step),
       stepNo: step.stepNo,
       scenarioNo: step.scenarioNo,
@@ -67,11 +67,11 @@ export class AssertionService {
   assertAndShowStep(step: Step, assertion: Assertion) {
     this.showExplorer();
 
-    //update explorer
+    // update explorer
     assertion.status = AssertionStatus.NotAsserted;
     this.assertions = [assertion];
 
-    //trigger assertion
+    // trigger assertion
     this.assertStep(step, assertion).subscribe(updatedAssertion => {
       this.assertions = [assertion];
     });
@@ -79,35 +79,35 @@ export class AssertionService {
 
   assertAndShowScenario(scenario: Scenario) {
     this.showExplorer();
-    //load existing assertions
+    // load existing assertions
     this.loadByScenario(scenario.scenarioNo).subscribe(assertions => {
 
       this.assertions = assertions;
 
-      //reset&merge assertions array
+      // reset&merge assertions array
       scenario.steps.forEach(step => {
-        let assertion = this.assertions.find(ass => ass.stepNo === step.stepNo);
+        const assertion = this.assertions.find(ass => ass.stepNo === step.stepNo);
         if (!assertion) {
-          //if there are no assertions for any step, include a dummy one
+          // if there are no assertions for any step, include a dummy one
           this.assertions.push(this.createDummyAssertion(step));
         }
         else {
-          assertion.status = AssertionStatus.NotAsserted; //set existing ones to not asserted (reset status)
+          assertion.status = AssertionStatus.NotAsserted; // set existing ones to not asserted (reset status)
         }
       });
 
-      //order steps and run assertions sequentially with concatMap
+      // order steps and run assertions sequentially with concatMap
       Observable.from(_.orderBy(scenario.steps, (step) => step.createdOn))
         .concatMap((step) => {
-          let assertion = this.assertions.find(ass => ass.stepNo === step.stepNo);
-          //load step invocations (as they are empty when scenario is loaded flat (loadByScenario))
+          const assertion = this.assertions.find(ass => ass.stepNo === step.stepNo);
+          // load step invocations (as they are empty when scenario is loaded flat (loadByScenario))
           return this.api.getStep(step.stepNo).flatMap(st => {
             step.invocations = st.invocations;
             return this.assertStep(step, assertion);
           })
         }).subscribe(assertion => {
-          let step = scenario.steps.find(st => st.stepNo === assertion.stepNo);
-          let index = _.findIndex(this.assertions, (ass) => ass.stepNo === step.stepNo);
+          const step = scenario.steps.find(st => st.stepNo === assertion.stepNo);
+          const index = _.findIndex(this.assertions, (ass) => ass.stepNo === step.stepNo);
           this.assertions[index] = assertion;
         });
     });
@@ -131,39 +131,37 @@ export class AssertionService {
   }
 
   private callService(rootInvocation: Invocation): Observable<Object> {
-    //result object
+    // result object
     let resultObj: Object;
 
-    //parse raw http request   
-    //https://www.npmjs.com/package/http-request-parser  
-    let parsedRequestObj: any = httpRequestParser.parse(rootInvocation.requestRaw);
+    // parse raw http request
+    // https://www.npmjs.com/package/http-request-parser
+    const parsedRequestObj: any = httpRequestParser.parse(rootInvocation.requestRaw);
 
-    //transform parsedRequestObj to make it suitable from Angular httpclient
-    //lookup http method
-    let httpHeaders: HttpHeaders = this.mapHttpHeaders(parsedRequestObj.headers, rootInvocation);
+    // transform parsedRequestObj to make it suitable from Angular httpclient
+    // lookup http method
+    const httpHeaders: HttpHeaders = this.mapHttpHeaders(parsedRequestObj.headers, rootInvocation);
 
-    //we only support POST for now, for full Rest API support, all HTTP verbs must be implemented
-    if (parsedRequestObj.method === "POST") {
-      //call service and get response obj
+    // we only support POST for now, for full Rest API support, all HTTP verbs must be implemented
+    if (parsedRequestObj.method === 'POST') {
+      // call service and get response obj
       const originalUrl: string = (<string>(parsedRequestObj.protocol)).toLowerCase() + '://' + parsedRequestObj.url;
 
       return this.http.post(originalUrl, parsedRequestObj.body.plain, { headers: httpHeaders })
-        .flatMap(res => this.handleResult(rootInvocation)) //handle success
-        .catch(err => this.handleResult(rootInvocation)); //or handle error both same as we go to api again and refresh assertion result
+        .flatMap(res => this.handleResult(rootInvocation)) // handle success
+        .catch(err => this.handleResult(rootInvocation)); // or handle error both same as we go to api again and refresh assertion result
     }
 
     return Observable.of(resultObj);
   }
 
   private handleResult(rootInvocation: Invocation): Observable<Assertion> {
-    //call api and get a fresh rootInvocation to obtain modified AssertionResult
+    // call api and get a fresh rootInvocation to obtain modified AssertionResult
     return this.api.getInvocation(rootInvocation.instanceHashCode).flatMap(inv => {
-      //return assertion result as json object
+      // return assertion result as json object
       return Observable.of(JSON.parse(inv.assertionResult));
     });
   }
-
-  private forbiddenCorsHeaders: string[] = ["Content-Length", "Accept-Encoding", "Host", "User-Agent", "Origin"];
 
   private mapHttpHeaders(headers: Array<any>, rootInvocation: Invocation): HttpHeaders {
     let angHeaders: HttpHeaders = new HttpHeaders();
@@ -171,9 +169,9 @@ export class AssertionService {
     headers.forEach(hdr => {
       if (!(_.includes(this.forbiddenCorsHeaders, hdr.name))) {
 
-        //find TestFlask-TestMode header and set it to 'Assert' mode
-        if (hdr.name === "TestFlask-Mode") {
-          angHeaders = angHeaders.append(hdr.name, "Assert");
+        // find TestFlask-TestMode header and set it to 'Assert' mode
+        if (hdr.name === 'TestFlask-Mode') {
+          angHeaders = angHeaders.append(hdr.name, 'Assert');
         }
         else {
           angHeaders = angHeaders.append(hdr.name, hdr.values[0].value);
@@ -181,15 +179,14 @@ export class AssertionService {
       }
     });
 
-    //append a step no header if it does not exist
-    let stepNoHeader = angHeaders.get("TestFlask-StepNo");
+    // append a step no header if it does not exist
+    const stepNoHeader = angHeaders.get('TestFlask-StepNo');
     if (!stepNoHeader) {
-      angHeaders = angHeaders.append("TestFlask-StepNo", rootInvocation.stepNo.toString());
+      angHeaders = angHeaders.append('TestFlask-StepNo', rootInvocation.stepNo.toString());
     }
     else {
-      angHeaders = angHeaders.set("TestFlask-StepNo", rootInvocation.stepNo.toString());
+      angHeaders = angHeaders.set('TestFlask-StepNo', rootInvocation.stepNo.toString());
     }
-
 
     return angHeaders;
   }

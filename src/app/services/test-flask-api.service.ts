@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Project, Scenario, Step, Invocation, Assertion } from "models/model";
-import { AppSettings } from "appSettings/appSettings";
-import { Observable } from "rxjs/Observable";
+import { HttpClient } from '@angular/common/http';
+import { Project, Scenario, Step, Invocation, Assertion } from 'models/model';
+import { AppSettings } from 'appSettings/appSettings';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TestFlaskApiService {
@@ -35,7 +35,7 @@ export class TestFlaskApiService {
     return this.http.put<Step>(AppSettings.API_ENDPOINT + 'step/', step);
   }
 
-  //inserts or updates
+  // inserts or updates
   public putAssertion(assertion: Assertion): Observable<Assertion> {
     return this.http.put<Assertion>(AppSettings.API_ENDPOINT + 'step/assertion/' + assertion.stepNo, assertion)
   }
@@ -61,7 +61,7 @@ export class TestFlaskApiService {
   }
 
   ngOnInit() {
-    
+
   }
 
 }

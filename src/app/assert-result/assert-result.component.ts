@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AssertionStatus } from "models/model";
+import { AssertionStatus } from 'models/model';
 
 @Component({
   selector: 'assert-result',
