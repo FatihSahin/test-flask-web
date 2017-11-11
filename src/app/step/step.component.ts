@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { TestFlaskApiService } from "app/services/test-flask-api.service";
+import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 import { Step, Invocation, Assertion, AssertionStatus } from 'models/model';
-import { ITreeOptions } from "angular-tree-component/dist/defs/api";
-import { StepService } from "app/step/step.service";
-import { NotificationsService } from "angular2-notifications";
-import { AssertionService } from "app/assertion/assertion.service";
-import { Subject } from "rxjs/Subject";
+import { ITreeOptions } from 'angular-tree-component/dist/defs/api';
+import { StepService } from 'app/step/step.service';
+import { NotificationsService } from 'angular2-notifications';
+import { AssertionService } from 'app/assertion/assertion.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-step',

@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import * as httpRequestParser from 'http-request-parser';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { NotificationsService } from 'angular2-notifications';
 
 @Injectable()
 export class AssertionService {
@@ -14,7 +15,7 @@ export class AssertionService {
   private forbiddenCorsHeaders: string[] = ['Content-Length', 'Accept-Encoding', 'Host', 'User-Agent', 'Origin'];
   assertions: Assertion[];
 
-  constructor(private api: TestFlaskApiService, private http: HttpClient) {
+  constructor(private api: TestFlaskApiService, private http: HttpClient, private notify: NotificationsService) {
     this.assertions = [];
   }
 
@@ -148,10 +149,25 @@ export class AssertionService {
 
       return this.http.post(originalUrl, parsedRequestObj.body.plain, { headers: httpHeaders })
         .flatMap(res => this.handleResult(rootInvocation)) // handle success
-        .catch(err => this.handleResult(rootInvocation)); // or handle error both same as we go to api again and refresh assertion result
+        .catch(err => {
+          this.notifyError('Assertion error', 'An error occured. Resorting to last saved assertion result.');
+          return this.handleResult(rootInvocation);
+        }); // or handle error both same as we go to api again and refresh assertion result
     }
 
     return Observable.of(resultObj);
+  }
+
+  private notifyError(title: string, msg: string): void {
+    this.notify.error(
+      title,
+      msg,
+      {
+        showProgressBar: false,
+        timeOut: 2500,
+        clickToClose: true,
+      }
+    );
   }
 
   private handleResult(rootInvocation: Invocation): Observable<Assertion> {
