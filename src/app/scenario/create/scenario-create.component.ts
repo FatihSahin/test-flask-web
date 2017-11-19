@@ -13,7 +13,8 @@ export class ScenarioCreateComponent implements OnInit {
 
   scenario: Scenario;
 
-  constructor(private api: TestFlaskApiService, private route: ActivatedRoute, private router: Router, private notify: NotificationsService) { 
+  constructor(private api: TestFlaskApiService, private route: ActivatedRoute, private router: Router,
+    private notify: NotificationsService) {
     this.scenario = new Scenario();
     this.scenario.steps = [];
   }

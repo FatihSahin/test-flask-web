@@ -9,13 +9,17 @@ import { CommonComponentsModule } from 'app/shared/common-components.module';
 import { ScenarioComponent } from 'app/scenario/scenario.component';
 import { ScenarioCreateComponent } from 'app/scenario/create/scenario-create.component';
 import { StepComponent } from 'app/step/step.component';
+import { StepAssertComponent } from 'app/step/assert/step-assert.component';
 import { TreeModule } from 'angular-tree-component';
 import { InvocationComponent } from 'app/invocation/invocation.component';
 import { StepService } from 'app/step/step.service';
 
-import { JsonPrettifyPipe } from 'app/invocation/json-prettify.pipe';
+import { JsonPrettifyPipe, JsonParserPipe } from 'app/invocation/json-transform.pipe';
 import { SimplifySignaturePipe } from 'app/invocation/simplify-signature.pipe';
 import { ProjectCreateComponent } from 'app/project/create/project-create.component';
+
+import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
+import { RouteReuseStrategy } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -24,6 +28,7 @@ import { ProjectCreateComponent } from 'app/project/create/project-create.compon
     FormsModule,
     TreeModule,
     CommonComponentsModule,
+    Ng4JsonEditorModule,
     ModalModule.forRoot()
   ],
   declarations: [
@@ -31,8 +36,10 @@ import { ProjectCreateComponent } from 'app/project/create/project-create.compon
     ScenarioComponent,
     ScenarioCreateComponent,
     StepComponent,
+    StepAssertComponent,
     InvocationComponent,
     JsonPrettifyPipe,
+    JsonParserPipe,
     SimplifySignaturePipe,
     ProjectCreateComponent
   ],

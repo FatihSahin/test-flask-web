@@ -11,3 +11,15 @@ export class JsonPrettifyPipe implements PipeTransform {
     }
   }
 }
+
+@Pipe({name: 'jsonParser'})
+export class JsonParserPipe implements PipeTransform {
+  transform(value: string): object {
+    try {
+      const obj = JSON.parse(value);
+      return obj;
+    } catch (e)  {
+      return null;
+    }
+  }
+}

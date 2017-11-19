@@ -14,10 +14,6 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./step.component.scss']
 })
 export class StepComponent implements OnInit {
-
-  // allows to use AssertionStatus in template
-  AssertionStatus = AssertionStatus;
-
   // props
   stepNo: number;
   step: Step;
@@ -131,18 +127,6 @@ export class StepComponent implements OnInit {
 
   assertStep() {
     this.assertionService.assertAndShowStep(this.step, this.assertion);
-  }
-
-  getAssertionStatusLabelStyle(status: AssertionStatus): Object {
-    switch (status) {
-      case AssertionStatus.Fail:
-        return { color: 'red' };
-      case AssertionStatus.Success:
-        return { color: 'green' };
-      case AssertionStatus.NotAsserted:
-      default:
-        return { color: 'black' };
-    }
   }
 
   playStep() {

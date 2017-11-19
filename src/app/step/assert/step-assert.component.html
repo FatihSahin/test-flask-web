@@ -1,0 +1,31 @@
+<label class="col-form-label">
+    <h6>Assertion</h6>
+</label>
+<div class="row card assertionContainer">
+    <div class="row form-group">
+        <div class="col-md-6">
+            <label class="col-form-label">Expected Result (Json)</label>
+            <!-- <textarea class="form-control" style="min-height:200px;" placeholder="Enter expected response object here..." [(ngModel)]="assertion.expected"></textarea> -->
+            <json-editor #jsonEditorForAssertExpected [options]="jsonEditorForAssertExpectedOptions" [data]="assertion.expected | jsonParser"></json-editor>
+        </div>
+        <div class="col-md-6">
+            <label class="col-form-label">Assertion Result (Json)</label>
+            <!-- <textarea class="form-control" style="min-height:200px;" readonly>{{ assertion.lastAssertionResult | jsonPrettify }}</textarea> -->
+            <json-editor #jsonEditorForAssertResult [options]="jsonEditorForAssertResultOptions" [data]="assertion.lastAssertionResult | jsonParser"></json-editor>
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-sm-2 col-form-label">Status</label>
+        <label class="col-sm-10 col-form-label" [ngStyle]="getAssertionStatusLabelStyle(assertion.status)">{{ AssertionStatus[assertion.status] }}</label>
+    </div>
+    <span *ngIf="assertion.lastAssertedOn">
+        <div class="row">
+            <label class="col-sm-2 col-form-label">Last Asserted On</label>
+            <label class="col-sm-10 col-form-label">{{assertion.lastAssertedOn | date:'short'}}</label>
+        </div>
+        <div class="row">
+            <label class="col-sm-2 col-form-label">Duration</label>
+            <label class="col-sm-10 col-form-label">{{assertion.duration}} ms</label>
+        </div>
+    </span>
+</div>

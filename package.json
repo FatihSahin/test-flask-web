@@ -27,6 +27,7 @@
     "@types/lodash": "^4.14.74",
     "angular-tree-component": "^4.1.0",
     "angular2-notifications": "^0.7.7",
+    "angular4-jsoneditor": "^1.0.7",
     "chart.js": "2.6.0",
     "core-js": "^2.4.1",
     "http-request-parser": "^1.2.0",
