@@ -15,7 +15,9 @@
 
 div.jsoneditor {
     height: 85% !important;
-    max-height: 450px;
+    min-height: 300px;
+    max-height: 500px;
+    border: 1px solid #20a8d8 !important;
 }
 
 div.jsoneditor-menu {
