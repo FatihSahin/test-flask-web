@@ -12,13 +12,24 @@
   <div class="row">
     <div class="col-md-7">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <label class="col-form-label">Scenario No</label>
           <input type="text" class="form-control" placeholder="Scenario No" [(ngModel)]="scenario.scenarioNo" readonly>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-6">
           <label class="col-form-label">Scenario Name</label>
           <input type="text" class="form-control" placeholder="Scenario Name" [(ngModel)]="scenario.scenarioName">
+        </div>
+        <div class="col-md-4">
+          <label class="col-form-label">Match Strategy</label>
+          <select class="form-control" [(ngModel)]="scenario.invocationMatchStrategy">
+            <option value="0">Inherit</option>
+            <option value="10">Signature</option>
+            <option value="20">Request</option>
+            <option value="30">Depth</option>
+            <option value="40">Sibling</option>
+            <option value="50">Exact</option>
+          </select>
         </div>
       </div>
       <div class="row">

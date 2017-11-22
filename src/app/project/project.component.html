@@ -1,3 +1,7 @@
+<span class="h5">{{projectKey}}</span>
+<hr/>
+<app-project-update></app-project-update>
+<hr />
 <span class="h5">{{ projectKey }} Scenarios</span>
 <div class="pull-right">
   <a [routerLink]="['createScenario']" class="btn btn-primary" role="button" aria-pressed="true"><i class="fa fa-film"></i> Create Scenario</a>
@@ -8,6 +12,7 @@
     <tr>
       <th>Scenario No</th>
       <th>Scenario Name</th>
+      <th>Match Strategy</th>
       <th>Description</th>
     </tr>
   </thead>
@@ -15,6 +20,7 @@
     <tr *ngFor="let scenario of scenarios">
       <th scope="row"><a [routerLink]="['scenario', scenario.scenarioNo]">{{scenario.scenarioNo}}</a></th>
       <td>{{scenario.scenarioName}}</td>
+      <td>{{InvocationMatch[scenario.invocationMatchStrategy]}}</td>
       <td>{{scenario.scenarioDescription}}</td>
     </tr>
   </tbody>

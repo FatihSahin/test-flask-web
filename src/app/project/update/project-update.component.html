@@ -1,11 +1,9 @@
-<span class="h5">Create Project</span>
-<hr />
-<div class="row">
+<div class="row" *ngIf="project">
   <div class="col-md-12">
     <div class="row">
       <div class="col-md-9">
         <label class="col-form-label">Project Key</label>
-        <input type="text" class="form-control" placeholder="Project Key" [(ngModel)]="project.projectKey">
+        <input type="text" class="form-control" placeholder="Project Key" [ngModel]="project.projectKey" readonly>
       </div>
       <div class="col-md-3">
         <label class="col-form-label">Project No</label>
@@ -35,5 +33,5 @@
         <textarea class="form-control projectDesc" placeholder="Description" [(ngModel)]="project.projectDescription"></textarea>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="createProject()"><i class="fa fa-save"></i> Create</button>
+    <button type="button" class="btn btn-primary" (click)="updateProject()"><i class="fa fa-save"></i> Update</button>
   </div>

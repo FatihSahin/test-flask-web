@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 import { Scenario } from 'models/model';
 import { AssertionService } from 'app/assertion/assertion.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-scenario',
@@ -14,7 +15,8 @@ export class ScenarioComponent implements OnInit {
   scenarioNo: number;
   scenario: Scenario;
 
-  constructor(private api: TestFlaskApiService, private assertionService: AssertionService, private route: ActivatedRoute) { }
+  constructor(private api: TestFlaskApiService, private assertionService: AssertionService, 
+    private route: ActivatedRoute, private notify: NotificationsService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -47,7 +49,17 @@ export class ScenarioComponent implements OnInit {
   }
 
   saveScenario() {
-    alert('Not implemented');
+    this.api.updateScenario(this.scenario).subscribe(sc => {
+      this.scenario = sc;
+      this.notify.success(
+        'Scenario #' + this.scenario.scenarioNo,
+        'Successfully updated!',
+        {
+          showProgressBar: false,
+          timeOut: 1500,
+          clickToClose: true,
+        }
+      );
+    });
   }
-
 }

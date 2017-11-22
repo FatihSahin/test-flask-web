@@ -8,11 +8,22 @@
       <label class="col-form-label">Step No</label>
       <input type="text" class="form-control" placeholder="Step No" [(ngModel)]="step.stepNo" readonly>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <label class="col-form-label">Step Name</label>
       <input type="text" class="form-control" placeholder="Step Name" [(ngModel)]="step.stepName">
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
+      <label class="col-form-label">Match Strategy</label>
+      <select class="form-control" [(ngModel)]="step.invocationMatchStrategy">
+        <option value="0">Inherit</option>
+        <option value="10">Signature</option>
+        <option value="20">Request</option>
+        <option value="30">Depth</option>
+        <option value="40">Sibling</option>
+        <option value="50">Exact</option>
+      </select>
+    </div>
+    <div class="col-md-2">
       <label class="col-form-label">Recorded On</label>
       <input type="text" class="form-control" placeholder="Recorded On" [ngModel]="step.createdOn | date:'medium'" readonly>
     </div>
