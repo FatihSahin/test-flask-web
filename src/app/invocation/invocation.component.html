@@ -36,18 +36,18 @@
   <div class="row">
     <div class="col-md-6">
       <label class="col-form-label">Request</label>
-      <!-- <textarea class="form-control jsonEditor" placeholder="Request" [ngModel]="invocation.request | jsonPrettify" (ngModelChange)="invocation.request=$event"></textarea> -->
-      <json-editor #jsonEditorForRequest [options]="jsonEditorForRequestOptions" [data]="invocation.request | jsonParser"></json-editor>
+      <textarea class="form-control jsonEditor" placeholder="Request" [ngModel]="invocation.request | jsonPrettify" (ngModelChange)="invocation.request=$event"></textarea>
+      <!-- <json-editor #jsonEditorForRequest [options]="jsonEditorForRequestOptions" [data]="invocation.request | jsonParser"></json-editor> -->
     </div>
     <div class="col-md-6" *ngIf="!invocation.isFaulted">
       <label class="col-form-label">Response</label>
-      <!-- <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Response" [ngModel]="invocation.response | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea> -->
-      <json-editor #jsonEditorForResponse [options]="jsonEditorForResponseOptions" [data]="invocation.response | jsonParser"></json-editor>
+      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Response" [ngModel]="invocation.response | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea>
+      <!-- <json-editor #jsonEditorForResponse [options]="jsonEditorForResponseOptions" [data]="invocation.response | jsonParser"></json-editor> -->
     </div>
     <div class="col-md-6" *ngIf="invocation.isFaulted">
       <label class="col-form-label">Exception</label>
-      <!-- <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea> -->
-      <json-editor #jsonEditorForException [options]="jsonEditorForExceptionOptions" [data]="invocation.exception | jsonParser"></json-editor>
+      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea>
+      <!-- <json-editor #jsonEditorForException [options]="jsonEditorForExceptionOptions" [data]="invocation.exception | jsonParser"></json-editor> -->
     </div>
   </div>
 </div>

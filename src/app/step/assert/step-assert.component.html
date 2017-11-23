@@ -5,13 +5,13 @@
     <div class="row form-group">
         <div class="col-md-6">
             <label class="col-form-label">Expected Result (Json)</label>
-            <!-- <textarea class="form-control" style="min-height:200px;" placeholder="Enter expected response object here..." [(ngModel)]="assertion.expected"></textarea> -->
-            <json-editor #jsonEditorForAssertExpected [options]="jsonEditorForAssertExpectedOptions" [data]="assertion.expected | jsonParser"></json-editor>
+            <textarea class="form-control" style="min-height:200px;" placeholder="Enter expected response object here..." [(ngModel)]="assertion.expected"></textarea>
+            <!-- <json-editor #jsonEditorForAssertExpected [options]="jsonEditorForAssertExpectedOptions" [data]="assertion.expected | jsonParser"></json-editor> -->
         </div>
         <div class="col-md-6">
             <label class="col-form-label">Assertion Result (Json)</label>
-            <!-- <textarea class="form-control" style="min-height:200px;" readonly>{{ assertion.lastAssertionResult | jsonPrettify }}</textarea> -->
-            <json-editor #jsonEditorForAssertResult [options]="jsonEditorForAssertResultOptions" [data]="assertion.lastAssertionResult | jsonParser"></json-editor>
+            <textarea class="form-control" style="min-height:200px;" readonly>{{ assertion.lastAssertionResult | jsonPrettify }}</textarea>
+            <!-- <json-editor #jsonEditorForAssertResult [options]="jsonEditorForAssertResultOptions" [data]="assertion.lastAssertionResult | jsonParser"></json-editor> -->
         </div>
     </div>
     <div class="row">

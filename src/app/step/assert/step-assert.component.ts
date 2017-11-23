@@ -13,11 +13,11 @@ export class StepAssertComponent implements OnInit {
     // allows to use AssertionStatus in template
     AssertionStatus = AssertionStatus;
 
-    jsonEditorForAssertExpectedOptions: JsonEditorOptions;
-    @ViewChild('jsonEditorForAssertExpected') jsonEditorForAssertExpected: JsonEditorComponent;
+    // jsonEditorForAssertExpectedOptions: JsonEditorOptions;
+    // @ViewChild('jsonEditorForAssertExpected') jsonEditorForAssertExpected: JsonEditorComponent;
 
-    jsonEditorForAssertResultOptions: JsonEditorOptions;
-    @ViewChild('jsonEditorForAssertResult') jsonEditorForAssertResult: JsonEditorComponent;
+    // jsonEditorForAssertResultOptions: JsonEditorOptions;
+    // @ViewChild('jsonEditorForAssertResult') jsonEditorForAssertResult: JsonEditorComponent;
 
     @Input() assertion: Assertion;
 
@@ -26,21 +26,21 @@ export class StepAssertComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.jsonEditorForAssertExpectedOptions = new JsonEditorOptions();
-        this.jsonEditorForAssertExpectedOptions.mode = 'code';
-        this.jsonEditorForAssertExpectedOptions.modes = [ 'code', 'tree', 'text'];
-        this.jsonEditorForAssertExpectedOptions.onChange = (() => {
-          this.assertion.expected = this.jsonEditorForAssertExpected.getText();
-        }).bind(this);
+        // this.jsonEditorForAssertExpectedOptions = new JsonEditorOptions();
+        // this.jsonEditorForAssertExpectedOptions.mode = 'code';
+        // this.jsonEditorForAssertExpectedOptions.modes = [ 'code', 'tree', 'text'];
+        // this.jsonEditorForAssertExpectedOptions.onChange = (() => {
+        //   this.assertion.expected = this.jsonEditorForAssertExpected.getText();
+        // }).bind(this);
 
-        this.jsonEditorForAssertResultOptions = new JsonEditorOptions();
-        this.jsonEditorForAssertResultOptions.mode = 'code';
-        this.jsonEditorForAssertResultOptions.modes = [ 'code', 'view', 'text'];
-        this.jsonEditorForAssertResultOptions.onChange = (() => {
-         // do nothing
-        }).bind(this);
+        // this.jsonEditorForAssertResultOptions = new JsonEditorOptions();
+        // this.jsonEditorForAssertResultOptions.mode = 'code';
+        // this.jsonEditorForAssertResultOptions.modes = [ 'code', 'view', 'text'];
+        // this.jsonEditorForAssertResultOptions.onChange = (() => {
+        //  // do nothing
+        // }).bind(this);
 
-        this.changeDetector.detectChanges();
+        // this.changeDetector.detectChanges();
     }
 
     getAssertionStatusLabelStyle(status: AssertionStatus): Object {
