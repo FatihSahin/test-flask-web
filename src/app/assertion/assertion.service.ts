@@ -147,8 +147,10 @@ export class AssertionService {
       // call service and get response obj
       const originalUrl: string = (<string>(parsedRequestObj.protocol)).toLowerCase() + '://' + parsedRequestObj.url;
 
-      return this.http.post(originalUrl, parsedRequestObj.body.plain, { headers: httpHeaders })
-        .flatMap(res => this.handleResult(rootInvocation)) // handle success
+      return this.http.post(originalUrl, parsedRequestObj.body.plain, { responseType: 'text', headers: httpHeaders })
+        .flatMap(res => { 
+          return this.handleResult(rootInvocation);
+        }) // handle success
         .catch(err => {
           this.notifyError('Assertion error', 'An error occured. Resorting to last saved assertion result.');
           return this.handleResult(rootInvocation);

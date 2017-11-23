@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
-import { Scenario } from 'models/model';
+import { Scenario, InvocationMatch } from 'models/model';
 
 @Component({
   selector: 'app-project',
@@ -11,6 +11,9 @@ import { Scenario } from 'models/model';
 export class ProjectComponent implements OnInit {
   projectKey: string;
   scenarios: Scenario[];
+
+  // allows to use in template
+  InvocationMatch = InvocationMatch;
 
   constructor(private api: TestFlaskApiService, private route: ActivatedRoute, private router: Router) {
 

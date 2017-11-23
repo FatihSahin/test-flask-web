@@ -26,7 +26,7 @@ import { AssertionService } from './assertion/assertion.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AssertionComponent } from './assertion/assertion.component';
 import { RouteReuseStrategy } from '@angular/router';
-import { CustomRouteReuseStrategy } from 'app/custom-reuse-strategy';
+// import { CustomRouteReuseStrategy } from 'app/custom-reuse-strategy';
 
 
 @NgModule({
@@ -56,10 +56,10 @@ import { CustomRouteReuseStrategy } from 'app/custom-reuse-strategy';
     //   provide: LocationStrategy,
     //   useClass: HashLocationStrategy
     // },
-    {
-      provide: RouteReuseStrategy,
-      useClass: CustomRouteReuseStrategy
-    },
+    // {
+    //   provide: RouteReuseStrategy,
+    //   useClass: CustomRouteReuseStrategy
+    // },
     TestFlaskApiService,
     AssertionService
   ],

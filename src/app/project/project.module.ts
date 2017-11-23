@@ -17,6 +17,7 @@ import { StepService } from 'app/step/step.service';
 import { JsonPrettifyPipe, JsonParserPipe } from 'app/invocation/json-transform.pipe';
 import { SimplifySignaturePipe } from 'app/invocation/simplify-signature.pipe';
 import { ProjectCreateComponent } from 'app/project/create/project-create.component';
+import { ProjectUpdateComponent } from 'app/project/update/project-update.component';
 
 import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
 import { RouteReuseStrategy } from '@angular/router';
@@ -41,7 +42,8 @@ import { RouteReuseStrategy } from '@angular/router';
     JsonPrettifyPipe,
     JsonParserPipe,
     SimplifySignaturePipe,
-    ProjectCreateComponent
+    ProjectCreateComponent,
+    ProjectUpdateComponent
   ],
   providers: [
     StepService

@@ -8,11 +8,14 @@ import { Observable } from 'rxjs/Observable';
 export class TestFlaskApiService {
 
   constructor(private http: HttpClient) {
-
   }
 
   public getProjects(): Observable<Project[]>  {
     return this.http.get<Project[]>(AppSettings.API_ENDPOINT + 'project');
+  }
+
+  public getProject(projectKey: string): Observable<Project> {
+    return this.http.get<Project>(AppSettings.API_ENDPOINT + 'project/' + projectKey);
   }
 
   public getScenariosFlat(projectKey: string): Observable<Scenario[]> {
@@ -56,8 +59,16 @@ export class TestFlaskApiService {
     return this.http.post<Scenario>(AppSettings.API_ENDPOINT + 'scenario', scenario);
   }
 
+  public updateScenario(scenario: Scenario): Observable<Scenario> {
+    return this.http.put<Scenario>(AppSettings.API_ENDPOINT + 'scenario', scenario);
+  }
+
   public insertProject(project: Project): Observable<Project> {
     return this.http.post<Project>(AppSettings.API_ENDPOINT + 'project', project);
+  }
+
+  public updateProject(project: Project): Observable<Project> {
+    return this.http.put<Project>(AppSettings.API_ENDPOINT + 'project', project);
   }
 
   ngOnInit() {

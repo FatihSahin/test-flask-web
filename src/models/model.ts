@@ -3,6 +3,7 @@ export class Project {
     projectName: string;
     projectKey: string;
     projectDescription: string;
+    invocationMatchStrategy: InvocationMatch;
 }
 
 export class Scenario {
@@ -11,6 +12,7 @@ export class Scenario {
     scenarioDescription: string;
     projectKey: string;
     createdOn: Date;
+    invocationMatchStrategy: InvocationMatch;
     steps: Step[];
 }
 
@@ -21,6 +23,7 @@ export class Step {
     stepName: string;
     stepDescription: string;
     createdOn: Date;
+    invocationMatchStrategy: InvocationMatch;
     invocations: Invocation[];
 }
 
@@ -43,12 +46,14 @@ export class Invocation {
     responseDisplayInfo: string;
     isReplayable: boolean;
     invocationIndex: number;
-    hashCode: string;
+    signatureHashCode: string;
+    requestHashCode: string;
     deepHashCode: string;
     leafHashCode: string;
     instanceHashCode: string;
     parentInstanceHashCode: string;
     assertionResult: string;
+    recordedOn: Date;
 }
 
 export class Assertion {
@@ -67,4 +72,13 @@ export enum AssertionStatus {
     NotAsserted = 0,
     Success = 1,
     Fail = 2
+}
+
+export enum InvocationMatch {
+    Inherit = 0, //inherits strategy from parent object, this is default
+    Signature = 10, //matches invocation by method signature
+    Request = 20, //matches invocation by method signature + request identifier key
+    Depth = 30, //matches invocation using deep hash code
+    Sibling = 40, //matches invocation with same parent using leaf hash code
+    Exact = 50, //matches exact invocation by using invocation instance hash code
 }
