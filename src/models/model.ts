@@ -53,6 +53,7 @@ export class Invocation {
     instanceHashCode: string;
     parentInstanceHashCode: string;
     assertionResult: string;
+    recordedOn: Date;
 }
 
 export class Assertion {

@@ -1,7 +1,8 @@
 <div *ngIf="invocation">
   <div class="row">
     <div class="col-md-12">
-      <label class="col-form-label"><strong>{{ invocation.invocationSignature | simplifySignature }}</strong> - Signature</label>
+      <label class="col-form-label"><strong>{{ invocation.invocationSignature | simplifySignature }}</strong> - Signature 
+        - <span style="font-size: x-small">Recorded On: {{invocation.recordedOn | date:'yyyy-MM-dd HH:mm:ss'}}</span></label>
       <input type="text" class="form-control" placeholder="Signature" [(ngModel)]="invocation.invocationSignature" readonly>
     </div>
   </div>

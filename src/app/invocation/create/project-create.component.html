@@ -1,0 +1,39 @@
+<span class="h5">Create Project</span>
+<hr />
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-9">
+        <label class="col-form-label">Project Key</label>
+        <input type="text" class="form-control" placeholder="Project Key" [(ngModel)]="project.projectKey">
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label">Project No</label>
+        <input type="text" class="form-control" placeholder="Project No" [(ngModel)]="project.projectNo" readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        <label class="col-form-label">Project Name</label>
+        <input type="text" class="form-control" placeholder="Project Name" [(ngModel)]="project.projectName">
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label">Match Strategy</label>
+        <select class="form-control" [(ngModel)]="project.invocationMatchStrategy">
+          <option value="0">Inherit</option>
+          <option value="10">Signature</option>
+          <option value="20">Request</option>
+          <option value="30">Depth</option>
+          <option value="40">Sibling</option>
+          <option value="50">Exact</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label class="col-form-label">Description</label>
+        <textarea class="form-control projectDesc" placeholder="Description" [(ngModel)]="project.projectDescription"></textarea>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="createProject()"><i class="fa fa-save"></i> Create</button>
+  </div>
