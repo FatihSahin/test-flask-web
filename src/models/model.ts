@@ -24,6 +24,7 @@ export class Step {
     stepDescription: string;
     createdOn: Date;
     invocationMatchStrategy: InvocationMatch;
+    rootInvocationReflectedType: string;
     invocations: Invocation[];
 }
 
@@ -37,6 +38,7 @@ export class Invocation {
     requestRaw: string;
     response: string;
     responseType: string;
+    reflectedType: string;
     isFaulted: boolean;
     exceptionType: string;
     exception: string;
