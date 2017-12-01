@@ -47,7 +47,7 @@
     </div>
     <div class="col-md-6" *ngIf="invocation.isFaulted">
       <label class="col-form-label">Exception</label>
-      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea>
+      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify" (ngModelChange)="invocation.exception=$event"></textarea>
       <!-- <json-editor #jsonEditorForException [options]="jsonEditorForExceptionOptions" [data]="invocation.exception | jsonParser"></json-editor> -->
     </div>
   </div>
