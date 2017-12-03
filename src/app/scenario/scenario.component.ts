@@ -15,7 +15,7 @@ export class ScenarioComponent implements OnInit {
   scenarioNo: number;
   scenario: Scenario;
 
-  constructor(private api: TestFlaskApiService, private assertionService: AssertionService, 
+  constructor(private api: TestFlaskApiService, private assertionService: AssertionService, private router: Router,
     private route: ActivatedRoute, private notify: NotificationsService) { }
 
   ngOnInit() {
@@ -45,7 +45,18 @@ export class ScenarioComponent implements OnInit {
   }
 
   cloneScenario() {
-    alert('Not implemented');
+    this.api.cloneScenario(this.scenario.scenarioNo).subscribe(sc => {
+      this.router.navigate(['scenario', sc.scenarioNo]);
+      this.notify.success(
+        'Scenario #' + sc.scenarioNo,
+        'Successfully cloned!',
+        {
+          showProgressBar: false,
+          timeOut: 1500,
+          clickToClose: true,
+        }
+      );
+    });
   }
 
   saveScenario() {

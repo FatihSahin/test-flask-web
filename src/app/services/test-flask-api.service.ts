@@ -59,6 +59,10 @@ export class TestFlaskApiService {
     return this.http.post<Scenario>(AppSettings.API_ENDPOINT + 'scenario', scenario);
   }
 
+  public cloneScenario(scenarioNo: number): Observable<Scenario> {
+    return this.http.post<Scenario>(AppSettings.API_ENDPOINT + 'scenario/clone', scenarioNo);
+  }
+
   public updateScenario(scenario: Scenario): Observable<Scenario> {
     return this.http.put<Scenario>(AppSettings.API_ENDPOINT + 'scenario', scenario);
   }
