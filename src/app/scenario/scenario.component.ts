@@ -46,7 +46,7 @@ export class ScenarioComponent implements OnInit {
 
   cloneScenario() {
     this.api.cloneScenario(this.scenario.scenarioNo).subscribe(sc => {
-      this.router.navigate(['scenario', sc.scenarioNo]);
+      this.router.navigate(['project', sc.projectKey, 'scenario', sc.scenarioNo]);
       this.notify.success(
         'Scenario #' + sc.scenarioNo,
         'Successfully cloned!',
