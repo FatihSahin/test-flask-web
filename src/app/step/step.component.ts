@@ -7,6 +7,7 @@ import { StepService } from 'app/step/step.service';
 import { NotificationsService } from 'angular2-notifications';
 import { AssertionService } from 'app/assertion/assertion.service';
 import { Subject } from 'rxjs/Subject';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-step',
@@ -77,7 +78,7 @@ export class StepComponent implements OnInit {
       this.stepService.step = this.step;
 
       // load invocations
-      this.loadInvocationTree(this.step.invocations);
+      this.loadInvocationTree(_.orderBy(this.step.invocations, ['depth', 'recordedOn', 'invocationIndex']));
       if (this.step.invocations) {
         this.rootInvocation = this.step.invocations.find(inv => inv.depth === 1);
       }
