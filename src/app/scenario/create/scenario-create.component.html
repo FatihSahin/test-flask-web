@@ -18,5 +18,12 @@
         <textarea class="form-control scenarioDesc" placeholder="Description" [(ngModel)]="scenario.scenarioDescription"></textarea>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label class="col-form-label">Labels</label>
+        <tag-input [(ngModel)]='scenario.labels' placeholder='+ Label'></tag-input>
+      </div>
+    </div>
+    <br />
     <button type="button" class="btn btn-primary" (click)="createScenario()"><i class="fa fa-save"></i> Create</button>
   </div>

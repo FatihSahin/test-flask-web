@@ -17,6 +17,7 @@ export class ScenarioCreateComponent implements OnInit {
     private notify: NotificationsService) {
     this.scenario = new Scenario();
     this.scenario.steps = [];
+    this.scenario.labels = [];
   }
 
   ngOnInit() {

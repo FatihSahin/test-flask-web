@@ -23,3 +23,7 @@ div.jsoneditor {
 div.jsoneditor-menu {
     background-color: #20a8d8 !important;
 }
+
+tag {
+    border-radius: 0px !important;
+}

@@ -14,6 +14,7 @@ export class Scenario {
     createdOn: Date;
     invocationMatchStrategy: InvocationMatch;
     steps: Step[];
+    labels: string[];
 }
 
 export class Step {
