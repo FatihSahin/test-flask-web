@@ -3,6 +3,7 @@ import { Scenario } from 'models/model';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-scenario-create',
@@ -12,6 +13,9 @@ import { NotificationsService } from 'angular2-notifications';
 export class ScenarioCreateComponent implements OnInit {
 
   scenario: Scenario;
+  getLabels = ((): Observable<string[]> => {
+    return this.api.getLabels(this.scenario.projectKey);
+  }).bind(this);
 
   constructor(private api: TestFlaskApiService, private route: ActivatedRoute, private router: Router,
     private notify: NotificationsService) {

@@ -14,6 +14,7 @@
       <th>Scenario Name</th>
       <th>Match Strategy</th>
       <th>Description</th>
+      <th>Labels</th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +22,10 @@
       <th scope="row"><a [routerLink]="['scenario', scenario.scenarioNo]">{{scenario.scenarioNo}}</a></th>
       <td>{{scenario.scenarioName}}</td>
       <td>{{InvocationMatch[scenario.invocationMatchStrategy]}}</td>
-      <td>{{scenario.scenarioDescription}}</td>
+      <td class="scenario-desc">{{scenario.scenarioDescription}}</td>
+      <td>
+        <span *ngFor="let label of scenario.labels" class="badge badge-warning scenario-label">{{label}}</span>
+      </td>
     </tr>
   </tbody>
 </table>

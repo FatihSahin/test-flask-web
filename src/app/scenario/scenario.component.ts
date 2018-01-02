@@ -4,6 +4,7 @@ import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 import { Scenario } from 'models/model';
 import { AssertionService } from 'app/assertion/assertion.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-scenario',
@@ -14,6 +15,9 @@ export class ScenarioComponent implements OnInit {
 
   scenarioNo: number;
   scenario: Scenario;
+  getLabels = ((): Observable<string[]> => {
+    return this.api.getLabels(this.scenario.projectKey);
+  }).bind(this);
 
   constructor(private api: TestFlaskApiService, private assertionService: AssertionService, private router: Router,
     private route: ActivatedRoute, private notify: NotificationsService) { }

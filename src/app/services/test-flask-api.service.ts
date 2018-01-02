@@ -75,6 +75,10 @@ export class TestFlaskApiService {
     return this.http.put<Project>(AppSettings.API_ENDPOINT + 'project', project);
   }
 
+  public getLabels(projectKey: string): Observable<string[]> {
+    return this.http.get<string[]>(AppSettings.API_ENDPOINT + 'project/labels/' + projectKey);
+  }
+
   ngOnInit() {
 
   }
