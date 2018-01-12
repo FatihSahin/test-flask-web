@@ -49,6 +49,7 @@ export class Invocation {
     responseDisplayInfo: string;
     isReplayable: boolean;
     invocationIndex: number;
+    invocationMode: InvocationMode;
     signatureHashCode: string;
     requestHashCode: string;
     deepHashCode: string;
@@ -84,4 +85,9 @@ export enum InvocationMatch {
     Depth = 30, //matches invocation using deep hash code
     Sibling = 40, //matches invocation with same parent using leaf hash code
     Exact = 50, //matches exact invocation by using invocation instance hash code
+}
+
+export enum InvocationMode {
+    Call = 0,
+    Replay = 1
 }
