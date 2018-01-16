@@ -19,9 +19,10 @@ import { SimplifySignaturePipe } from 'app/invocation/simplify-signature.pipe';
 import { ProjectCreateComponent } from 'app/project/create/project-create.component';
 import { ProjectUpdateComponent } from 'app/project/update/project-update.component';
 
-//import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
+// import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
 import { TagInputModule } from 'ngx-chips';
 import { RouteReuseStrategy } from '@angular/router';
+import { ScenarioService } from 'app/scenario/scenario.service';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { RouteReuseStrategy } from '@angular/router';
     TreeModule,
     CommonComponentsModule,
     TagInputModule,
-    //Ng4JsonEditorModule,
+    // Ng4JsonEditorModule,
     ModalModule.forRoot()
   ],
   declarations: [
@@ -48,7 +49,8 @@ import { RouteReuseStrategy } from '@angular/router';
     ProjectUpdateComponent
   ],
   providers: [
-    StepService
+    StepService,
+    ScenarioService
   ]
 })
 export class ProjectModule { }

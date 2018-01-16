@@ -8,6 +8,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { AssertionService } from 'app/assertion/assertion.service';
 import { Subject } from 'rxjs/Subject';
 import * as _ from 'lodash';
+import { ScenarioService } from 'app/scenario/scenario.service';
 
 @Component({
   selector: 'app-step',
@@ -23,8 +24,9 @@ export class StepComponent implements OnInit {
   tree: Array<any> = [];
   treeOptions: ITreeOptions;
 
-  constructor(private api: TestFlaskApiService, private route: ActivatedRoute,
-    private stepService: StepService, private notify: NotificationsService, private assertionService: AssertionService) {
+  constructor(private api: TestFlaskApiService, private route: ActivatedRoute, private router: Router,
+    private stepService: StepService, private notify: NotificationsService,
+    private assertionService: AssertionService, private scenarioService: ScenarioService) {
   }
 
   loadInvocationTree(invocations: Invocation[]) {
@@ -107,6 +109,8 @@ export class StepComponent implements OnInit {
       else { // directly notify
         this.notifyStepSave(step);
       }
+      // refresh step lists for scenario component
+      this.scenarioService.provideScenario(step.scenarioNo);
     });
   }
 
