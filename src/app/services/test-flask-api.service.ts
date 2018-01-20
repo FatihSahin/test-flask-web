@@ -38,6 +38,10 @@ export class TestFlaskApiService {
     return this.http.put<Step>(AppSettings.API_ENDPOINT + 'step/', step);
   }
 
+  public deleteStep(stepNo: number): Observable<boolean> {
+    return this.http.delete<boolean>(AppSettings.API_ENDPOINT + 'step/' + stepNo);
+  }
+
   // inserts or updates
   public putAssertion(assertion: Assertion): Observable<Assertion> {
     return this.http.put<Assertion>(AppSettings.API_ENDPOINT + 'step/assertion/' + assertion.stepNo, assertion)
@@ -67,6 +71,10 @@ export class TestFlaskApiService {
     return this.http.put<Scenario>(AppSettings.API_ENDPOINT + 'scenario', scenario);
   }
 
+  public deleteScenario(scenarioNo: number): Observable<boolean> {
+    return this.http.delete<boolean>(AppSettings.API_ENDPOINT + 'scenario/' + scenarioNo);
+  }
+
   public insertProject(project: Project): Observable<Project> {
     return this.http.post<Project>(AppSettings.API_ENDPOINT + 'project', project);
   }
@@ -78,9 +86,4 @@ export class TestFlaskApiService {
   public getLabels(projectKey: string): Observable<string[]> {
     return this.http.get<string[]>(AppSettings.API_ENDPOINT + 'project/labels/' + projectKey);
   }
-
-  ngOnInit() {
-
-  }
-
 }

@@ -5,6 +5,7 @@
   <button type="button" class="btn btn-primary" (click)="playScenario()"><i class="fa fa-play"></i> Play</button>
   <button type="button" class="btn btn-success" (click)="assertScenario()"><i class="fa fa-flask"></i> Assert</button>
   <button type="button" class="btn btn-primary" (click)="cloneScenario()"><i class="fa fa-clone"></i> Clone</button>
+  <button type="button" class="btn btn-danger" (click)="deleteScenario()"><i class="fa fa-trash"></i> Delete</button>
   <button type="button" class="btn btn-primary" (click)="saveScenario()"><i class="fa fa-floppy-o"></i> Save</button>
 </div>
 <hr/>
@@ -51,7 +52,7 @@
       <div class="col-md-12" *ngIf="scenario.steps && scenario.steps.length > 0">
         <label class="col-form-label">Recorded Steps</label>
         <div class="list-group stepList">
-          <a [routerLink]="['step', step.stepNo]" [routerLinkActive]="['active']" class="list-group-item" *ngFor="let step of scenario.steps">#{{step.stepNo}} - {{step.stepName}} <div style="font-size: x-small">{{step.createdOn | date:'medium'}}</div></a>
+          <a [routerLink]="['step', step.stepNo]" [routerLinkActive]="['active']" class="list-group-item" *ngFor="let step of scenario.steps">#{{step.stepNo}} - {{step.stepName}} <a class="pull-right" (click)="deleteStep(step.stepNo)"><i class="fa fa-trash"></i></a><div style="font-size: x-small">{{step.createdOn | date:'medium'}}</div></a>
         </div>
       </div>
     </div>
