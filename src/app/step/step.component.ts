@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
-import { Step, Invocation, Assertion, AssertionStatus } from 'models/model';
+import { Step, Invocation, Assertion, AssertionStatus, InvocationMode } from 'models/model';
 import { ITreeOptions } from 'angular-tree-component/dist/defs/api';
 import { StepService } from 'app/step/step.service';
 import { NotificationsService } from 'angular2-notifications';

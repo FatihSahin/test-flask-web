@@ -22,8 +22,6 @@ export class ScenarioComponent implements OnInit {
 
   constructor(private api: TestFlaskApiService, private assertionService: AssertionService, private scenarioService: ScenarioService,
     private router: Router, private route: ActivatedRoute, private notify: NotificationsService) {
-
-
   }
 
   ngOnInit() {

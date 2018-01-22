@@ -42,7 +42,9 @@
           <!-- https://angular2-tree.readme.io/docs/templates -->
           <tree-root style="font-size:small;" [nodes]="tree">
             <ng-template #treeNodeTemplate let-node let-index="index">
-              <a [routerLink]="['invocation', node.data.id]" [title]="node.data.invocation.invocationSignature" [class.faultedInvocation]="node.data.invocation.isFaulted">{{ node.data.name }} - ({{node.data.invocation.duration}} ms)</a>
+              <a [routerLink]="['invocation', node.data.id]" [title]="node.data.invocation.invocationSignature" 
+              [class.invocationModeReplay]="node.data.invocation.invocationMode == 1"
+              [class.faultedInvocation]="node.data.invocation.isFaulted">{{ node.data.name }} - ({{node.data.invocation.duration}} ms)</a>
             </ng-template>
           </tree-root>
         </div>

@@ -1,8 +1,10 @@
 <div *ngIf="invocation">
   <div class="row">
     <div class="col-md-12">
-      <label class="col-form-label"><strong>{{ invocation.invocationSignature | simplifySignature }}</strong> - Signature 
-        - <span style="font-size: x-small">Recorded On: {{invocation.recordedOn | date:'yyyy-MM-dd HH:mm:ss'}}</span></label>
+      <label class="col-form-label">
+        <strong>{{ invocation.invocationSignature | simplifySignature }}</strong> - Signature -
+        <span style="font-size: x-small">Recorded On: {{invocation.recordedOn | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+      </label>
       <input type="text" class="form-control" placeholder="Signature" [(ngModel)]="invocation.invocationSignature" readonly>
     </div>
   </div>
@@ -17,21 +19,28 @@
     </div>
     <div class="col-md-1" style="padding-right: 0px;">
       <label class="col-form-label">Faulted</label>
-      <input type="checkbox" disabled style="margin-top: 5px;width:auto;" class="form-control" [ngModel]="invocation.isFaulted">
+      <input type="checkbox" style="margin-top: 5px;width:auto;" class="form-control" [(ngModel)]="invocation.isFaulted">
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <label class="col-form-label">Request Info</label>
-      <input type="text" class="form-control" placeholder="Request Info" [(ngModel)]="invocation.requestDisplayInfo" readonly>
+      <input type="text" class="form-control" readonly placeholder="Request Info" [ngModel]="invocation.requestDisplayInfo">
     </div>
-    <div class="col-md-6" *ngIf="!invocation.isFaulted">
+    <div class="col-md-6">
       <label class="col-form-label">Response Info</label>
-      <input type="text" class="form-control" placeholder="Response Info" [(ngModel)]="invocation.responseDisplayInfo" readonly>
+      <input type="text" class="form-control" readonly placeholder="Response Info" [ngModel]="invocation.responseDisplayInfo">
     </div>
-    <div class="col-md-6" *ngIf="invocation.isFaulted">
+  </div>
+  <div class="row">
+    <div class=col-md-6></div>
+    <div class="col-md-6" [style.display]="!invocation.isFaulted ? 'block':'none'">
+      <label class="col-form-label">Response Type</label>
+      <input type="text" class="form-control" placeholder="Response Type" [(ngModel)]="invocation.responseType">
+    </div>
+    <div class="col-md-6" [style.display]="invocation.isFaulted ? 'block':'none'">
       <label class="col-form-label">Exception Type</label>
-      <input type="text" class="form-control" placeholder="Exception Type" [(ngModel)]="invocation.exceptionType" readonly>
+      <input type="text" class="form-control" placeholder="Exception Type" [(ngModel)]="invocation.exceptionType">
     </div>
   </div>
   <div class="row">
@@ -42,12 +51,14 @@
     </div>
     <div class="col-md-6" *ngIf="!invocation.isFaulted">
       <label class="col-form-label">Response</label>
-      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Response" [ngModel]="invocation.response | jsonPrettify" (ngModelChange)="invocation.response=$event"></textarea>
+      <textarea class="form-control jsonEditor" placeholder="Response" [ngModel]="invocation.response | jsonPrettify"
+        (ngModelChange)="invocation.response=$event"></textarea>
       <!-- <json-editor #jsonEditorForResponse [options]="jsonEditorForResponseOptions" [data]="invocation.response | jsonParser"></json-editor> -->
     </div>
     <div class="col-md-6" *ngIf="invocation.isFaulted">
       <label class="col-form-label">Exception</label>
-      <textarea class="form-control jsonEditor" [readonly]="!invocation.isReplayable" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify" (ngModelChange)="invocation.exception=$event"></textarea>
+      <textarea class="form-control jsonEditor" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify"
+        (ngModelChange)="invocation.exception=$event"></textarea>
       <!-- <json-editor #jsonEditorForException [options]="jsonEditorForExceptionOptions" [data]="invocation.exception | jsonParser"></json-editor> -->
     </div>
   </div>
