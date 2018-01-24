@@ -24,7 +24,7 @@
       <td>{{InvocationMatch[scenario.invocationMatchStrategy]}}</td>
       <td class="scenario-desc">{{scenario.scenarioDescription}}</td>
       <td>
-        <span *ngFor="let label of scenario.labels" class="badge badge-warning scenario-label">{{label}}</span>
+        <span *ngFor="let label of scenario.labels" class="badge badge-warning scenario-label" [style.backgroundColor]="getBackgroundColor(label)">{{label}}</span>
       </td>
     </tr>
   </tbody>

@@ -26,4 +26,17 @@ export class ProjectComponent implements OnInit {
     });
   }
 
+  // Modified version of Thymine's solution on
+  // https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
+  getBackgroundColor(label: string): string {
+    let hash = 0;
+    if (label.length > 0) {
+      for (let i = 0; i < label.length; i++) {
+        hash = label.charCodeAt(i) + ((hash << 5) - hash);
+        hash = hash & hash;
+      }
+    }
+    const hue = Math.floor(Math.abs((Math.sin(hash) * 10000) % 1 * 16777216)) % 360;
+    return 'hsl(' + hue + ',100%,75%)';
+  }
 }
