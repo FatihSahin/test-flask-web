@@ -13,7 +13,7 @@ export class StepService {
   }
 
   simplifyName(signature: string): string {
-    const expression = /::(\w+)\(/;
+    const expression = /::([\w\.]+)\(/;
     const match = expression.exec(signature);
     return match[1];
   }
