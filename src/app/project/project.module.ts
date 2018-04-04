@@ -15,11 +15,12 @@ import { InvocationComponent } from 'app/invocation/invocation.component';
 import { StepService } from 'app/step/step.service';
 
 import { JsonPrettifyPipe, JsonParserPipe } from 'app/invocation/json-transform.pipe';
+import { JsonViewerComponent } from 'app/shared/json-viewer.component';
 import { SimplifySignaturePipe } from 'app/invocation/simplify-signature.pipe';
 import { ProjectCreateComponent } from 'app/project/create/project-create.component';
 import { ProjectUpdateComponent } from 'app/project/update/project-update.component';
 
-// import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
+import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
 import { TagInputModule } from 'ngx-chips';
 import { RouteReuseStrategy } from '@angular/router';
 import { ScenarioService } from 'app/scenario/scenario.service';
@@ -32,7 +33,7 @@ import { ScenarioService } from 'app/scenario/scenario.service';
     TreeModule,
     CommonComponentsModule,
     TagInputModule,
-    // Ng4JsonEditorModule,
+    Ng4JsonEditorModule,
     ModalModule.forRoot()
   ],
   declarations: [
@@ -44,6 +45,7 @@ import { ScenarioService } from 'app/scenario/scenario.service';
     InvocationComponent,
     JsonPrettifyPipe,
     JsonParserPipe,
+    JsonViewerComponent,
     SimplifySignaturePipe,
     ProjectCreateComponent,
     ProjectUpdateComponent

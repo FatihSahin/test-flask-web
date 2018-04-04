@@ -46,20 +46,15 @@
   <div class="row">
     <div class="col-md-6">
       <label class="col-form-label">Request</label>
-      <textarea class="form-control jsonEditor" placeholder="Request" [ngModel]="invocation.request | jsonPrettify" (ngModelChange)="invocation.request=$event"></textarea>
-      <!-- <json-editor #jsonEditorForRequest [options]="jsonEditorForRequestOptions" [data]="invocation.request | jsonParser"></json-editor> -->
+      <json-viewer #jsonViewerForRequest (change)="onChangeRequest($event)"></json-viewer>
     </div>
     <div class="col-md-6" *ngIf="!invocation.isFaulted">
       <label class="col-form-label">Response</label>
-      <textarea class="form-control jsonEditor" placeholder="Response" [ngModel]="invocation.response | jsonPrettify"
-        (ngModelChange)="invocation.response=$event"></textarea>
-      <!-- <json-editor #jsonEditorForResponse [options]="jsonEditorForResponseOptions" [data]="invocation.response | jsonParser"></json-editor> -->
+      <json-viewer #jsonViewerForResponse (change)="onChangeResponse($event)"></json-viewer>
     </div>
     <div class="col-md-6" *ngIf="invocation.isFaulted">
       <label class="col-form-label">Exception</label>
-      <textarea class="form-control jsonEditor" placeholder="Exception" [ngModel]="invocation.exception | jsonPrettify"
-        (ngModelChange)="invocation.exception=$event"></textarea>
-      <!-- <json-editor #jsonEditorForException [options]="jsonEditorForExceptionOptions" [data]="invocation.exception | jsonParser"></json-editor> -->
+      <json-viewer #jsonViewerForException (change)="onChangeException($event)"></json-viewer>
     </div>
   </div>
 </div>

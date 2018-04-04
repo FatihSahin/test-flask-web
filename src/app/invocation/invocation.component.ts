@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { StepService } from 'app/step/step.service';
 import { Invocation } from 'models/model';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 // import { JsonEditorComponent, JsonEditorOptions } from 'angular4-jsoneditor/jsoneditor/jsoneditor.component';
 import { ChangeDetectorRef } from '@angular/core';
+import { JsonViewerComponent } from 'app/shared/json-viewer.component';
 
 @Component({
   selector: 'app-invocation',
@@ -16,14 +17,24 @@ export class InvocationComponent implements OnInit {
   invocationHashCode: string;
   invocation: Invocation;
 
-  // jsonEditorForRequestOptions: JsonEditorOptions;
-  // @ViewChild('jsonEditorForRequest') jsonEditorForRequest: JsonEditorComponent;
+  jsonViewerForRequest: JsonViewerComponent;
+  jsonViewerForResponse: JsonViewerComponent;
+  jsonViewerForException: JsonViewerComponent;
 
-  // jsonEditorForResponseOptions: JsonEditorOptions;
-  // @ViewChild('jsonEditorForResponse') jsonEditorForResponse: JsonEditorComponent;
+  @ViewChild('jsonViewerForRequest') set viewerRequest(viewer: JsonViewerComponent) {
+    this.jsonViewerForRequest = viewer;
+    this.setRequest();
+  }
 
-  // jsonEditorForExceptionOptions: JsonEditorOptions;
-  // @ViewChild('jsonEditorForException') jsonEditorForException: JsonEditorComponent;
+  @ViewChild('jsonViewerForResponse') set viewerResponse(viewer: JsonViewerComponent) {
+    this.jsonViewerForResponse = viewer;
+    this.setResponse();
+  }
+
+  @ViewChild('jsonViewerForException') set viewerException(viewer: JsonViewerComponent) {
+    this.jsonViewerForException = viewer;
+    this.setException();
+  }
 
   constructor(private api: TestFlaskApiService, private route: ActivatedRoute, private stepService: StepService,
     private changeDetector: ChangeDetectorRef) {
@@ -34,29 +45,39 @@ export class InvocationComponent implements OnInit {
       this.invocationHashCode = params.get('hashCode');
       this.invocation = this.stepService.getInvocation(this.invocationHashCode);
 
-      // this.jsonEditorForRequestOptions = new JsonEditorOptions();
-      // this.jsonEditorForRequestOptions.mode = 'code';
-      // this.jsonEditorForRequestOptions.modes = ['code', 'tree', 'text'];
-      // this.jsonEditorForRequestOptions.onChange = (() => {
-      //   this.invocation.request = this.jsonEditorForRequest.getText();
-      // }).bind(this);
-
-      // this.jsonEditorForResponseOptions = new JsonEditorOptions();
-      // this.jsonEditorForResponseOptions.mode = 'code';
-      // this.jsonEditorForResponseOptions.modes = ['code', 'tree', 'text'];
-      // this.jsonEditorForResponseOptions.onChange = (() => {
-      //   this.invocation.response = this.jsonEditorForResponse.getText();
-      // }).bind(this);
-
-      // this.jsonEditorForExceptionOptions = new JsonEditorOptions();
-      // this.jsonEditorForExceptionOptions.mode = 'code';
-      // this.jsonEditorForExceptionOptions.modes = ['code', 'tree', 'text'];
-      // this.jsonEditorForExceptionOptions.onChange = (() => {
-      //   this.invocation.exception = this.jsonEditorForException.getText();
-      // }).bind(this);
-
-      // this.changeDetector.detectChanges();
+      this.setRequest();
+      this.setResponse();
+      this.setException();
     });
   }
-}
 
+  private setException() {
+    if (this.jsonViewerForException) {
+      this.jsonViewerForException.setData(this.invocation.exception);
+    }
+  }
+
+  private setResponse() {
+    if (this.jsonViewerForResponse) {
+      this.jsonViewerForResponse.setData(this.invocation.response);
+    }
+  }
+
+  private setRequest() {
+    if (this.jsonViewerForRequest) {
+      this.jsonViewerForRequest.setData(this.invocation.request);
+    }
+  }
+
+  onChangeRequest(data: Object): void {
+    this.invocation.request = JSON.stringify(data);
+  }
+
+  onChangeResponse(data: Object): void {
+    this.invocation.response = JSON.stringify(data);
+  }
+
+  onChangeException(data: Object): void {
+    this.invocation.exception = JSON.stringify(data);
+  }
+}
