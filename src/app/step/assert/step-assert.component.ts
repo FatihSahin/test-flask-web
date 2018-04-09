@@ -1,46 +1,56 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, SimpleChanges, OnChanges } from '@angular/core';
 import { Assertion, AssertionStatus } from 'models/model';
 import { JsonEditorComponent, JsonEditorOptions } from 'angular4-jsoneditor/jsoneditor/jsoneditor.component';
-import { race } from 'rxjs/observable/race';
+import { JsonViewerComponent } from 'app/shared/json-viewer.component';
 
 @Component({
     selector: 'app-step-assert',
     templateUrl: './step-assert.component.html',
     styleUrls: ['./step-assert.component.scss']
 })
-export class StepAssertComponent implements OnInit {
+export class StepAssertComponent implements OnChanges {
 
     // allows to use AssertionStatus in template
     AssertionStatus = AssertionStatus;
 
-    // jsonEditorForAssertExpectedOptions: JsonEditorOptions;
-    // @ViewChild('jsonEditorForAssertExpected') jsonEditorForAssertExpected: JsonEditorComponent;
+    jsonViewerForAssertExpected: JsonViewerComponent;
+    jsonViewerForAssertResult: JsonViewerComponent;
 
-    // jsonEditorForAssertResultOptions: JsonEditorOptions;
-    // @ViewChild('jsonEditorForAssertResult') jsonEditorForAssertResult: JsonEditorComponent;
+    @ViewChild('jsonViewerForAssertExpected') set viewerExpected(viewer: JsonViewerComponent) {
+        this.jsonViewerForAssertExpected = viewer;
+    }
+
+    @ViewChild('jsonViewerForAssertResult') set viewerResult(viewer: JsonViewerComponent) {
+        this.jsonViewerForAssertResult = viewer;
+    }
 
     @Input() assertion: Assertion;
 
     constructor(private changeDetector: ChangeDetectorRef) {
-
     }
 
-    ngOnInit() {
-        // this.jsonEditorForAssertExpectedOptions = new JsonEditorOptions();
-        // this.jsonEditorForAssertExpectedOptions.mode = 'code';
-        // this.jsonEditorForAssertExpectedOptions.modes = [ 'code', 'tree', 'text'];
-        // this.jsonEditorForAssertExpectedOptions.onChange = (() => {
-        //   this.assertion.expected = this.jsonEditorForAssertExpected.getText();
-        // }).bind(this);
+    ngOnChanges(changes: SimpleChanges) {
+        this.setExpected();
+        this.setResult();
+    }
 
-        // this.jsonEditorForAssertResultOptions = new JsonEditorOptions();
-        // this.jsonEditorForAssertResultOptions.mode = 'code';
-        // this.jsonEditorForAssertResultOptions.modes = [ 'code', 'view', 'text'];
-        // this.jsonEditorForAssertResultOptions.onChange = (() => {
-        //  // do nothing
-        // }).bind(this);
+    private setExpected() {
+        if (this.jsonViewerForAssertExpected) {
+            this.jsonViewerForAssertExpected.setData(this.assertion.expected);
+        }
+    }
 
-        // this.changeDetector.detectChanges();
+    private setResult() {
+        if (this.jsonViewerForAssertResult) {
+            this.jsonViewerForAssertResult.setData(this.assertion.lastAssertionResult);
+        }
+    }
+
+    onChangeResult(data: Object): void {
+    }
+
+    onChangeExpected(data: Object): void {
+        this.assertion.expected = JSON.stringify(data);
     }
 
     getAssertionStatusLabelStyle(status: AssertionStatus): Object {

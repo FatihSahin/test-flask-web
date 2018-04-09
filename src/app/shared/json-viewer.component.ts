@@ -16,9 +16,10 @@ export class JsonViewerComponent implements OnInit {
 
     setData(value: string) {
         try {
-            const obj = JSON.parse(value);
+            const obj = JSON.parse(value ? value : '{}');
             this.jsonEditor.set(obj);
-        } catch (error) { }
+        } catch (error) {
+        }
     }
 
     ngOnInit() {
