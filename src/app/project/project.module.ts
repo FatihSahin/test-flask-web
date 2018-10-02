@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ProjectComponent } from './project.component';
 import { ProjectRoutingModule } from './project-routing.module';
 
@@ -22,7 +23,7 @@ import { ProjectUpdateComponent } from 'app/project/update/project-update.compon
 
 import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
 import { TagInputModule } from 'ngx-chips';
-import { RouteReuseStrategy } from '@angular/router';
+// import { RouteReuseStrategy } from '@angular/router';
 import { ScenarioService } from 'app/scenario/scenario.service';
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ScenarioService } from 'app/scenario/scenario.service';
     CommonComponentsModule,
     TagInputModule,
     Ng4JsonEditorModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    CollapseModule.forRoot()
   ],
   declarations: [
     ProjectComponent,

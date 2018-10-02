@@ -10,6 +10,7 @@ import { JsonViewerComponent } from 'app/shared/json-viewer.component';
 })
 export class StepAssertComponent implements OnChanges {
 
+    isCollapsed = true;
     // allows to use AssertionStatus in template
     AssertionStatus = AssertionStatus;
 

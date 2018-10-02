@@ -25,7 +25,7 @@ import { TestFlaskApiService } from './services/test-flask-api.service';
 import { AssertionService } from './assertion/assertion.service';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AssertionComponent } from './assertion/assertion.component';
-import { RouteReuseStrategy } from '@angular/router';
+// import { RouteReuseStrategy } from '@angular/router';
 // import { CustomRouteReuseStrategy } from 'app/custom-reuse-strategy';
 
 

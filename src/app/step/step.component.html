@@ -54,11 +54,6 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="assertion">
-    <div class="col-md-12 form-group">
-      <app-step-assert [assertion]="assertion"></app-step-assert>
-    </div>
-  </div>
   <!-- Raw Request Modal -->
   <div class="modal fade" bsModal #rawRequestModal="bs-modal">
     <div class="modal-dialog modal-lg" role="document">
@@ -91,4 +86,9 @@
       <button type="button" class="btn btn-primary" (click)="saveStep()"><i class="fa fa-floppy-o"></i> Save</button>
     </div>
   </div>
+  <div class="row" *ngIf="assertion">
+      <div class="col-md-12 form-group">
+        <app-step-assert [assertion]="assertion"></app-step-assert>
+      </div>
+    </div>
 </div>
