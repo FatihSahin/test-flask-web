@@ -1,5 +1,7 @@
 # TestFlask Manager UI
 
+Visit [TestFlask GitHub Page](https://testflask.github.io) for more details.
+
 This is an Angular2 SPA for managing [TestFlask](https://github.com/FatihSahin/test-flask) projects, scenarios and run assertions and manage step operations.
 
 In order to properly manage your services project, your services must be TestFlask ready. For further explanations to prepare your service, examine [TestFlask](https://github.com/FatihSahin/test-flask) project.
