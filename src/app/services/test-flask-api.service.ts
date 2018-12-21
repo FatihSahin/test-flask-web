@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Project, Scenario, Step, Invocation, Assertion } from 'models/model';
 import { AppSettings } from 'appSettings/appSettings';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TestFlaskApiService {

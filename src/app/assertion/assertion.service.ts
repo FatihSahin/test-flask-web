@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 import { Assertion, Step, Invocation, AssertionStatus, Scenario } from 'models/model';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import 'rxjs/Rx';
 import * as _ from 'lodash';
 import * as httpRequestParser from 'http-request-parser';

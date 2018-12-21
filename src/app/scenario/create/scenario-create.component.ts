@@ -3,7 +3,7 @@ import { Scenario } from 'models/model';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 import { NotificationsService } from 'angular2-notifications';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-scenario-create',

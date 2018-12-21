@@ -6,7 +6,7 @@ import { ITreeOptions } from 'angular-tree-component/dist/defs/api';
 import { StepService } from 'app/step/step.service';
 import { NotificationsService } from 'angular2-notifications';
 import { AssertionService } from 'app/assertion/assertion.service';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import * as _ from 'lodash';
 import { ScenarioService } from 'app/scenario/scenario.service';
 

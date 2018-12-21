@@ -4,7 +4,7 @@ import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 import { Scenario } from 'models/model';
 import { AssertionService } from 'app/assertion/assertion.service';
 import { NotificationsService } from 'angular2-notifications';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ScenarioService } from 'app/scenario/scenario.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
-import { JsonEditorOptions, JsonEditorComponent } from 'angular4-jsoneditor/jsoneditor/jsoneditor.component';
+import { JsonEditorOptions, JsonEditorComponent } from 'ang-jsoneditor';
 
 @Component({
     selector: 'json-viewer',

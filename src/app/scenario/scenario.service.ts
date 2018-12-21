@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { Scenario } from 'models/model';
 import { TestFlaskApiService } from 'app/services/test-flask-api.service';
 

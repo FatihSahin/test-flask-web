@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, SimpleChanges, OnChanges } from '@angular/core';
 import { Assertion, AssertionStatus } from 'models/model';
-import { JsonEditorComponent, JsonEditorOptions } from 'angular4-jsoneditor/jsoneditor/jsoneditor.component';
 import { JsonViewerComponent } from 'app/shared/json-viewer.component';
 
 @Component({

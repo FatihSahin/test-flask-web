@@ -21,7 +21,7 @@ import { SimplifySignaturePipe } from 'app/invocation/simplify-signature.pipe';
 import { ProjectCreateComponent } from 'app/project/create/project-create.component';
 import { ProjectUpdateComponent } from 'app/project/update/project-update.component';
 
-import { Ng4JsonEditorModule } from 'angular4-jsoneditor';
+import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { TagInputModule } from 'ngx-chips';
 // import { RouteReuseStrategy } from '@angular/router';
 import { ScenarioService } from 'app/scenario/scenario.service';
@@ -31,10 +31,10 @@ import { ScenarioService } from 'app/scenario/scenario.service';
     ProjectRoutingModule,
     CommonModule,
     FormsModule,
-    TreeModule,
+    TreeModule.forRoot(),
     CommonComponentsModule,
     TagInputModule,
-    Ng4JsonEditorModule,
+    NgJsonEditorModule.forRoot(),
     ModalModule.forRoot(),
     CollapseModule.forRoot()
   ],
